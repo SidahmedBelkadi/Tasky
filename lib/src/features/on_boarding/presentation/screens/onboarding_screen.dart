@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/common/widgets/app_elevated_button.dart';
-import '../../../../core/utils/app_strings.dart';
+import 'package:todo_app/src/config/routes/app_routes.dart';
+import 'package:todo_app/src/features/on_boarding/presentation/widgets/button.dart';
 import '../../../../core/utils/media_query_values.dart';
-import '../widgets/header_image.dart';
+import '../../../../core/common/widgets/female_header_image.dart';
 import '../widgets/header_texts.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -19,7 +19,7 @@ class OnBoardingScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               /// Header Image Background
-              const OnBoardingHeaderImage(),
+              const FemaleHeaderImageBackground(),
 
               SizedBox(height: 20.0.h),
 
@@ -27,15 +27,10 @@ class OnBoardingScreen extends StatelessWidget {
               const OnBoardingHeaderTexts(),
 
               /// Button
-              AppElevatedButton(
-                isIconVisible: true,
-                onPressed: () {},
-                child: Text(
-                  AppStrings.letsStart,
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        color: Colors.white,
-                      ),
-                ),
+              OnBoardingButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacementNamed(Routes.signIn);
+                },
               ),
               SizedBox(height: 64.0.h),
             ],

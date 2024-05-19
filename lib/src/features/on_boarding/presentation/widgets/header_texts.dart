@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/src/core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 
 class OnBoardingHeaderTexts extends StatelessWidget {
@@ -21,7 +22,9 @@ class OnBoardingHeaderTexts extends StatelessWidget {
           Text(
             AppStrings.onBoardingSubTitle,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall,
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  color: AppColors.secondaryText,
+                ),
           ),
           const SizedBox(height: 32.0),
         ],

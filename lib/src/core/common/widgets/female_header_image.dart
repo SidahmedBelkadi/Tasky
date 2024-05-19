@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/app_images.dart';
-import '../../../../core/utils/media_query_values.dart';
+import '../../utils/app_images.dart';
+import '../../utils/media_query_values.dart';
 
-class OnBoardingHeaderImage extends StatelessWidget {
-  const OnBoardingHeaderImage({
+class FemaleHeaderImageBackground extends StatelessWidget {
+  const FemaleHeaderImageBackground({
     super.key,
   });
 

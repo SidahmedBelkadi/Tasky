@@ -37,6 +37,7 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_native_splash: ^2.4.0
   flutter_screenutil: ^5.9.1
+  intl_phone_field: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -107,7 +108,7 @@ flutter_native_splash:
   # splash screen to a png image.  This is useful for gradients. The image will be stretch to the
   # size of the app. Only one parameter can be used, color and background_image cannot both be set.
   color: "#5F33E1"
-  background_image: "assets/icons/icon.png"
+  # background_image: "assets/icons/icon.png"
 
   # Optional parameters are listed below.  To enable a parameter, uncomment the line by removing
   # the leading # character.
@@ -204,7 +205,7 @@ flutter_native_splash:
   # https://developer.android.com/reference/android/view/Gravity): bottom, center,
   # center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal,
   # fill_vertical, left, right, start, or top.
-  #android_gravity: center
+  android_gravity: center
   #
   # ios_content_mode can be one of the following iOS UIView.ContentMode (see
   # https://developer.apple.com/documentation/uikit/uiview/contentmode): scaleToFill,
