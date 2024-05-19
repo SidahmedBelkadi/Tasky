@@ -8,15 +8,9 @@ class TodoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Todo Application',
+      debugShowCheckedModeBanner: false,
       theme: appTheme(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Todo'),
-        ),
-        body: const Center(
-          child: Text("Todo App"),
-        ),
-      ),
+      home: const Scaffold(),
     );
   }
 }
