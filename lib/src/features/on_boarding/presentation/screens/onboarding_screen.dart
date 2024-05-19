@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/common/widgets/app_elevated_button.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/media_query_values.dart';
@@ -20,7 +21,7 @@ class OnBoardingScreen extends StatelessWidget {
               /// Header Image Background
               const OnBoardingHeaderImage(),
 
-              const SizedBox(height: 20.0),
+              SizedBox(height: 20.0.h),
 
               /// Header Title & SubTitle
               const OnBoardingHeaderTexts(),
@@ -36,7 +37,7 @@ class OnBoardingScreen extends StatelessWidget {
                       ),
                 ),
               ),
-              const SizedBox(height: 64.0),
+              SizedBox(height: 64.0.h),
             ],
           ),
         ),
