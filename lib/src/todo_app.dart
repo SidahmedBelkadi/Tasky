@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/src/config/routes/app_routes.dart';
 import 'package:todo_app/src/config/themes/app_theme.dart';
 
 class TodoApp extends StatelessWidget {
@@ -10,7 +11,8 @@ class TodoApp extends StatelessWidget {
       title: 'Todo Application',
       debugShowCheckedModeBanner: false,
       theme: appTheme(),
-      home: const Scaffold(),
+      initialRoute: '/',
+      onGenerateRoute: AppRoutes.onGenerateRoute,
     );
   }
 }
