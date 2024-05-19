@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/src/core/utils/app_strings.dart';
-import 'package:todo_app/src/features/on_boarding/presentation/screens/onboarding_screen.dart';
+import '../../core/utils/app_strings.dart';
+import '../../features/on_boarding/presentation/screens/onboarding_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';

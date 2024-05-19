@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/src/config/routes/app_routes.dart';
-import 'package:todo_app/src/config/themes/app_theme.dart';
+import 'config/routes/app_routes.dart';
+import 'config/themes/app_theme.dart';
 
 class TodoApp extends StatelessWidget {
   const TodoApp({super.key});
