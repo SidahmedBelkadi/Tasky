@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/src/core/utils/app_colors.dart';
-import 'package:todo_app/src/core/utils/app_strings.dart';
 
 class AccountQuestion extends StatelessWidget {
   const AccountQuestion({
@@ -21,7 +20,7 @@ class AccountQuestion extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            AppStrings.dontHaveAccount,
+            text,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: AppColors.secondaryText,
                 ),
@@ -29,7 +28,7 @@ class AccountQuestion extends StatelessWidget {
           TextButton(
             onPressed: onPressed,
             child: Text(
-              AppStrings.signUpHere,
+              buttonText,
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: AppColors.primary,
                     decoration: TextDecoration.underline,
