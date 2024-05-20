@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:todo_app/src/core/common/widgets/app_text_form_field.dart';
-import 'package:todo_app/src/core/utils/app_strings.dart';
+
+import '../../../../core/common/widgets/app_text_form_field.dart';
+import '../../../../core/utils/app_strings.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/src/core/utils/app_colors.dart';
+
+import '../../utils/app_colors.dart';
 
 class AccountQuestion extends StatelessWidget {
   const AccountQuestion({

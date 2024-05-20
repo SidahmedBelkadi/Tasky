@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../utils/app_icons.dart';
 import '../../utils/media_query_values.dart';
 
@@ -21,7 +22,7 @@ class AppElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: context.width,
-      height: 56.h,
+      height: 64.h,
       child: ElevatedButton(
         onPressed: onPressed,
         child: Row(

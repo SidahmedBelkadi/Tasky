@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_app/src/config/routes/app_routes.dart';
-import 'package:todo_app/src/core/common/widgets/account_question.dart';
-import 'package:todo_app/src/core/utils/app_strings.dart';
-import 'package:todo_app/src/core/utils/media_query_values.dart';
-import 'package:todo_app/src/features/sign_in/presentation/widgets/button.dart';
-import 'package:todo_app/src/features/sign_in/presentation/widgets/form.dart';
+
+import '../../../../config/routes/app_routes.dart';
+import '../../../../core/common/widgets/account_question.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/media_query_values.dart';
+import '../widgets/button.dart';
+import '../widgets/form.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -21,6 +22,11 @@ class SignInScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                /// SignIn Header Image Background
+                // const FemaleHeaderImageBackground(fit: BoxFit.fill),
+
+                // SizedBox(height: 16.h),
+
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 32.sp),
                   child: Column(
@@ -37,7 +43,11 @@ class SignInScreen extends StatelessWidget {
                       SizedBox(height: 24.0.h),
 
                       /// SignIn Button
-                      const SignInButton(),
+                      SignInButton(
+                        onPressed: () {
+                          Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
+                        },
+                      ),
                     ],
                   ),
                 ),

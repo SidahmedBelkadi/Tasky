@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/src/core/utils/app_colors.dart';
+
+import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 
 class OnBoardingHeaderTexts extends StatelessWidget {

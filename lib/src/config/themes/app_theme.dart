@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:todo_app/src/config/themes/widgets_themes/text_form_field.dart';
+import 'widgets_themes/app_bar.dart';
+import 'widgets_themes/text_form_field.dart';
 import 'widgets_themes/elevated_button.dart';
 import 'widgets_themes/text_theme.dart';
 
@@ -22,5 +23,8 @@ ThemeData appTheme() {
 
     /// Form Field Theme
     inputDecorationTheme: inputDecorationTheme,
+
+    /// AppBar Theme
+    appBarTheme: appBarTheme,
   );
 }

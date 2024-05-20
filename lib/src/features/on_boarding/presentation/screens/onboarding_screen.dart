@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_app/src/config/routes/app_routes.dart';
-import 'package:todo_app/src/features/on_boarding/presentation/widgets/button.dart';
-import '../../../../core/utils/media_query_values.dart';
+
+import '../../../../config/routes/app_routes.dart';
 import '../../../../core/common/widgets/female_header_image.dart';
+import '../../../../core/utils/media_query_values.dart';
+import '../widgets/button.dart';
 import '../widgets/header_texts.dart';
 
 class OnBoardingScreen extends StatelessWidget {

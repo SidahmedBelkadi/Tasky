@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_app/src/config/routes/app_routes.dart';
-import 'package:todo_app/src/core/common/widgets/account_question.dart';
-import 'package:todo_app/src/core/utils/app_strings.dart';
-import 'package:todo_app/src/core/utils/media_query_values.dart';
-import 'package:todo_app/src/features/sign_up/presentation/widgets/button.dart';
-import 'package:todo_app/src/features/sign_up/presentation/widgets/form.dart';
+
+import '../../../../config/routes/app_routes.dart';
+import '../../../../core/common/widgets/account_question.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../widgets/button.dart';
+import '../widgets/form.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -16,7 +16,7 @@ class SignUpScreen extends StatelessWidget {
       body: SafeArea(
           child: SingleChildScrollView(
         child: SizedBox(
-          height: context.height,
+          // height: context.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -37,7 +37,9 @@ class SignUpScreen extends StatelessWidget {
                     SizedBox(height: 24.h),
 
                     /// SignUp Button
-                    SignUpButton(onPressed: () {}),
+                    SignUpButton(onPressed: () {
+                      Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
+                    }),
 
                     /// SignUp Button
                     AccountQuestion(

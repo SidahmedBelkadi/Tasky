@@ -20,4 +20,16 @@ class AppStrings {
   static const junior = "Junior";
   static const midLevel = "Mid-Level";
   static const senior = "Senior";
+  static const tasky = "Tasky";
+  static const tasks = "Tasks";
+  static const all = "All";
+  static const inProgress = "InProgress";
+  static const waiting = "Waiting";
+  static const finished = "Finished";
+  static const dummyTastText =
+      "This application is designed for super shops. By using this they deliver Customers will get a one-stop solution for shopping.";
+  static const dummyTaskTitle = "Grocery Shopping App";
+  static const medium = "Medium";
+  static const low = "Low";
+  static const heigh = "high";
 }

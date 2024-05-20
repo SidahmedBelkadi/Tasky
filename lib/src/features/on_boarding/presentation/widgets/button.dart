@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_app/src/core/common/widgets/app_elevated_button.dart';
-import 'package:todo_app/src/core/utils/app_strings.dart';
+import '../../../../core/common/widgets/app_elevated_button.dart';
+import '../../../../core/utils/app_strings.dart';
 
 class OnBoardingButton extends StatelessWidget {
   const OnBoardingButton({

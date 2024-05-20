@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/src/features/sign_in/presentation/screens/sign_in_screen.dart';
-import 'package:todo_app/src/features/sign_up/presentation/screens/sign_up_screen.dart';
+import '../../features/sign_in/presentation/screens/sign_in_screen.dart';
+import '../../features/sign_up/presentation/screens/sign_up_screen.dart';
+import '../../features/task/presentation/task_home/tasks_screen.dart';
 import '../../core/utils/app_strings.dart';
 import '../../features/on_boarding/presentation/screens/onboarding_screen.dart';
 
@@ -8,6 +9,7 @@ class Routes {
   static const String initialRoute = '/';
   static const String signIn = '/sign_in';
   static const String signUp = '/sign_un';
+  static const String tasksHome = '/tasks_home';
 }
 
 class AppRoutes {
@@ -24,6 +26,10 @@ class AppRoutes {
       case Routes.signUp:
         return MaterialPageRoute(
           builder: (_) => const SignUpScreen(),
+        );
+      case Routes.tasksHome:
+        return MaterialPageRoute(
+          builder: (_) => const TasksScreen(),
         );
 
       default:
