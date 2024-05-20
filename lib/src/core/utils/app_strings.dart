@@ -32,4 +32,15 @@ class AppStrings {
   static const medium = "Medium";
   static const low = "Low";
   static const heigh = "high";
+  static const taskDetail = "Task Detail";
+  static const addImg = "Add Image";
+  static const taskTitle = "Task Title";
+  static const taskDesc = "Task Description";
+  static const priority = "Priority";
+  static const dueDate = "Due Date";
+  static const enterTitle = "Enter Title here...";
+  static const enterDesc = "Enter Description here...";
+  static const chooseDueDate = "Choose due date...";
+  static const addTask = "Add Task";
+  static const addNewTask = "Add New Task";
 }

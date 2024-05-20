@@ -7,4 +7,5 @@ TextTheme textTheme = TextTheme(
   bodyLarge: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700),
   bodySmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
   labelMedium: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
+  labelSmall: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400),
 );

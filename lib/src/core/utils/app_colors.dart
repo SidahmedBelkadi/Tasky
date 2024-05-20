@@ -20,4 +20,5 @@ class AppColors {
   static const highProiorityColor = waitingTextColor;
   static const mediumProiorityColor = primary;
   static const lowProiorityColor = Color(0xff0087FF);
+  static const grey = Color(0xffEBE5FF);
 }

@@ -9,7 +9,7 @@ class AppElevatedButton extends StatelessWidget {
     super.key,
     this.isIconVisible = false,
     required this.child,
-    this.icon = AppIcons.arrowLeft,
+    this.icon = AppIcons.arrowRight,
     this.onPressed,
   });
 

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/utils/app_images.dart';
-import '../../../../core/utils/app_strings.dart';
-import '../../../../core/utils/task_priority_enum.dart';
-import 'widgets/app_bar.dart';
-import 'widgets/categories_listview.dart';
-import 'widgets/task.dart';
-import 'widgets/title.dart';
+import 'widgets/floating_action_buttons.dart';
 
-import '../../../../core/utils/task_status_enum.dart';
+import '../../../../core/common/widgets/app_bar.dart';
+import '../../../../core/common/widgets/app_bar_action_icon.dart';
+import '../../../../core/utils/app_icons.dart';
+import '../../../../core/utils/app_strings.dart';
+import 'widgets/categories_listview.dart';
+import 'widgets/tasks_listview.dart';
+import 'widgets/title.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
@@ -16,7 +16,8 @@ class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TasksHomeAppBar(),
+      appBar: buildTasksHomeAppBar(),
+      floatingActionButton: const CustomTasksScreenFloatingActionButtons(),
       body: Padding(
         padding: EdgeInsets.all(22.sp),
         child: Column(
@@ -41,49 +42,23 @@ class TasksScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class TasksListView extends StatelessWidget {
-  const TasksListView({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: const [
-        TaskItem(
-          taskImage: AppImages.grocery,
-          taskTitle: AppStrings.dummyTaskTitle,
-          taskDesc: AppStrings.dummyTastText,
-          taskPriority: TaskPriority.medium,
-          taskStatus: TaskStatus.waiting,
-          taskDate: '31/12/2022',
+  /// Function That Build The appBar
+  CustomTasksAppBar buildTasksHomeAppBar() {
+    return CustomTasksAppBar(
+      isLogo: true,
+      title: AppStrings.tasky,
+      actions: [
+        AppBarActionIcon(
+          asset: AppIcons.user,
+          onTap: () {},
         ),
-        TaskItem(
-          taskImage: AppImages.grocery,
-          taskTitle: AppStrings.dummyTaskTitle,
-          taskDesc: AppStrings.dummyTastText,
-          taskPriority: TaskPriority.low,
-          taskStatus: TaskStatus.waiting,
-          taskDate: '31/12/2022',
+        SizedBox(width: 10.w),
+        AppBarActionIcon(
+          asset: AppIcons.logout,
+          onTap: () {},
         ),
-        TaskItem(
-          taskImage: AppImages.grocery,
-          taskTitle: AppStrings.dummyTaskTitle,
-          taskDesc: AppStrings.dummyTastText,
-          taskPriority: TaskPriority.high,
-          taskStatus: TaskStatus.inProgress,
-          taskDate: '31/12/2022',
-        ),
-        TaskItem(
-          taskImage: AppImages.grocery,
-          taskTitle: AppStrings.dummyTaskTitle,
-          taskDesc: AppStrings.dummyTastText,
-          taskPriority: TaskPriority.medium,
-          taskStatus: TaskStatus.finished,
-          taskDate: '31/12/2022',
-        )
+        SizedBox(width: 10.w),
       ],
     );
   }
