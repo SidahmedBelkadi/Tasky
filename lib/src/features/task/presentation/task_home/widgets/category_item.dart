@@ -15,7 +15,7 @@ class TaskCategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 36.h,
+      height: 36.sp,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       alignment: Alignment.center,
       decoration: BoxDecoration(

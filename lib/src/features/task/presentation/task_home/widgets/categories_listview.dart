@@ -12,7 +12,7 @@ class TaskCategoriesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40.h,
+      height: 40.sp,
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [

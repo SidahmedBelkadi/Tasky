@@ -32,7 +32,7 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.h,
+      height: 100.sp,
       width: context.width,
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
       child: Row(
@@ -41,8 +41,8 @@ class TaskItem extends StatelessWidget {
         children: [
           Image.asset(
             taskImage,
-            height: 64.h,
-            width: 64.w,
+            height: 64.sp,
+            width: 64.sp,
             fit: BoxFit.fill,
           ),
           SizedBox(width: 8.w),
