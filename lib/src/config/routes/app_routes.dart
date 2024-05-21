@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/src/core/animation/routes_animation_manager.dart';
 
 import '../../core/utils/app_strings.dart';
 import '../../features/on_boarding/presentation/screens/onboarding_screen.dart';
@@ -19,48 +20,29 @@ class AppRoutes {
   static Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.initialRoute:
-        return _buildRouteWithAnimation(
+        return RoutesAnimationManager.fadeTransition(
           const OnBoardingScreen(),
         );
       case Routes.signIn:
-        return _buildRouteWithAnimation(
+        return RoutesAnimationManager.scaleTransition(
           const SignInScreen(),
         );
       case Routes.signUp:
-        return _buildRouteWithAnimation(
+        return RoutesAnimationManager.scaleTransition(
           const SignUpScreen(),
         );
       case Routes.tasksHome:
-        return _buildRouteWithAnimation(
+        return RoutesAnimationManager.slideFromRightTransition(
           const TasksScreen(),
         );
       case Routes.addTask:
-        return _buildRouteWithAnimation(
+        return RoutesAnimationManager.slideFromBottomTransition(
           const AddTaskScreen(),
         );
 
       default:
         return unDefinedRoute();
     }
-  }
-
-  static Route<dynamic> _buildRouteWithAnimation(Widget page) {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => page,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(1.0, 0.0);
-        const end = Offset.zero;
-        const curve = Curves.ease;
-
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-        var offsetAnimation = animation.drive(tween);
-
-        return SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        );
-      },
-    );
   }
 
   static Route<dynamic> unDefinedRoute() {
