@@ -18,6 +18,7 @@ class AppTextFormField extends StatelessWidget {
     this.fillColor = AppColors.categorybackgroundColorGrey,
     this.onSuffixTap,
     this.readOnly = false,
+    this.isBold = false,
   });
 
   final String? hint;
@@ -32,6 +33,7 @@ class AppTextFormField extends StatelessWidget {
   final Color fillColor;
   final void Function()? onSuffixTap;
   final bool readOnly;
+  final bool isBold;
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +43,21 @@ class AppTextFormField extends StatelessWidget {
       controller: textEditingController,
       minLines: minLines,
       maxLines: maxLines,
-      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: AppColors.secondaryText),
+      style: !isBold
+          ? Theme.of(context).textTheme.bodySmall!.copyWith(
+                color: AppColors.secondaryText,
+              )
+          : Theme.of(context).textTheme.headlineSmall!.copyWith(
+                color: AppColors.secondaryText,
+              ),
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
+        labelStyle: isBold
+            ? Theme.of(context).textTheme.labelMedium!.copyWith(
+                  color: AppColors.secondaryText,
+                )
+            : null,
         floatingLabelBehavior: label != null ? FloatingLabelBehavior.always : null,
         suffixIcon: suffixIcon != null ? _buildSuffixIcon() : null,
         filled: filled,

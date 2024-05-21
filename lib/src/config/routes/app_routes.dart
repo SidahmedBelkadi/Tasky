@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../core/animation/routes_animation_manager.dart';
-import '../../features/task/presentation/task_details.dart/task_details_screen.dart';
 
+import '../../core/animation/routes_animation_manager.dart';
 import '../../core/utils/app_strings.dart';
 import '../../features/on_boarding/presentation/screens/onboarding_screen.dart';
+import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/sign_in/presentation/screens/sign_in_screen.dart';
 import '../../features/sign_up/presentation/screens/sign_up_screen.dart';
 import '../../features/task/presentation/add_task/add_task_screen.dart';
+import '../../features/task/presentation/task_details.dart/task_details_screen.dart';
 import '../../features/task/presentation/task_home/tasks_screen.dart';
 
 class Routes {
@@ -16,6 +17,7 @@ class Routes {
   static const String tasksHome = '/tasks_home';
   static const String addTask = '/add_task';
   static const String taskDetails = '/task_details';
+  static const String profile = '/profile';
 }
 
 class AppRoutes {
@@ -48,6 +50,11 @@ class AppRoutes {
       case Routes.taskDetails:
         return RoutesAnimationManager.slideFromBottomTransition(
           const TaskDetailsScreen(),
+        );
+
+      case Routes.profile:
+        return RoutesAnimationManager.slideFromBottomTransition(
+          const ProfileScreen(),
         );
 
       default:

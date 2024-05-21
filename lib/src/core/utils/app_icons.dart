@@ -15,4 +15,5 @@ class AppIcons {
   static const calendar = "$iconsDir/calendar.png";
   static const arrowDown = "$iconsDir/arrow_down.png";
   static const qrCode = "$iconsDir/qr_code.png";
+  static const copy = "$iconsDir/copy.png";
 }

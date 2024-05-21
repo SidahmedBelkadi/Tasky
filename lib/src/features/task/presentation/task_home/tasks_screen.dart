@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../config/routes/app_routes.dart';
 import '../../../../core/common/widgets/app_bar.dart';
 import '../../../../core/common/widgets/app_bar_action_icon.dart';
 import '../../../../core/utils/app_icons.dart';
@@ -16,7 +17,7 @@ class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildTasksHomeAppBar(),
+      appBar: buildTasksHomeAppBar(context),
       floatingActionButton: const CustomTasksScreenFloatingActionButtons(),
       body: Padding(
         padding: EdgeInsets.all(22.sp),
@@ -44,14 +45,16 @@ class TasksScreen extends StatelessWidget {
   }
 
   /// Function That Build The appBar
-  CustomTasksAppBar buildTasksHomeAppBar() {
+  CustomTasksAppBar buildTasksHomeAppBar(BuildContext context) {
     return CustomTasksAppBar(
       isLogo: true,
       title: AppStrings.tasky,
       actions: [
         AppBarActionIcon(
           asset: AppIcons.user,
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(Routes.profile);
+          },
         ),
         SizedBox(width: 10.w),
         AppBarActionIcon(

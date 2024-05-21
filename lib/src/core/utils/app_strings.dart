@@ -53,4 +53,10 @@ class AppStrings {
   static const dummyId = "6640dc5e1971e94d3c98d84d";
   static const showMore = "Show More";
   static const showLess = "Show Less";
+  static const profile = "Profile";
+  static const phone = "PHONE";
+  static const level = "LEVEL";
+  static const location = "LOCATION";
+  static const nameMaj = "NAME";
+  static const yearsOfExpMaj = "YEARS OF EXPERIENCE";
 }
