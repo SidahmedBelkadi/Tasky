@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class RoutesAnimationManager {
   RoutesAnimationManager._();
 
-  static Route<dynamic> fadeTransition(Widget page) {
+  static Route<dynamic> fadeTransition(Widget page, {Object? args}) {
     return PageRouteBuilder(
+      settings: RouteSettings(arguments: args),
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
@@ -15,8 +16,9 @@ class RoutesAnimationManager {
     );
   }
 
-  static Route<dynamic> scaleTransition(Widget page) {
+  static Route<dynamic> scaleTransition(Widget page, {Object? args}) {
     return PageRouteBuilder(
+      settings: RouteSettings(arguments: args),
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return ScaleTransition(
@@ -27,8 +29,9 @@ class RoutesAnimationManager {
     );
   }
 
-  static Route<dynamic> rotationTransition(Widget page) {
+  static Route<dynamic> rotationTransition(Widget page, {Object? args}) {
     return PageRouteBuilder(
+      settings: RouteSettings(arguments: args),
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return RotationTransition(
@@ -39,8 +42,9 @@ class RoutesAnimationManager {
     );
   }
 
-  static Route<dynamic> slideFromLeftTransition(Widget page) {
+  static Route<dynamic> slideFromLeftTransition(Widget page, {Object? args}) {
     return PageRouteBuilder(
+      settings: RouteSettings(arguments: args),
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(-1.0, 0.0);
@@ -58,8 +62,9 @@ class RoutesAnimationManager {
     );
   }
 
-  static Route<dynamic> slideFromRightTransition(Widget page) {
+  static Route<dynamic> slideFromRightTransition(Widget page, {Object? args}) {
     return PageRouteBuilder(
+      settings: RouteSettings(arguments: args),
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(1.0, 0.0);
@@ -77,8 +82,9 @@ class RoutesAnimationManager {
     );
   }
 
-  static Route<dynamic> slideFromBottomTransition(Widget page) {
+  static Route<dynamic> slideFromBottomTransition(Widget page, {Object? args}) {
     return PageRouteBuilder(
+      settings: RouteSettings(arguments: args),
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(0.0, 1.0);
@@ -96,8 +102,9 @@ class RoutesAnimationManager {
     );
   }
 
-  static Route<dynamic> fadeScaleTransition(Widget page) {
+  static Route<dynamic> fadeScaleTransition(Widget page, {Object? args}) {
     return PageRouteBuilder(
+      settings: RouteSettings(arguments: args),
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(

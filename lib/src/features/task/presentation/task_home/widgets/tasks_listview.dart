@@ -18,7 +18,7 @@ class TasksListView extends StatelessWidget {
       children: [
         TaskItem(
           onTap: () {
-            Navigator.of(context).pushNamed(Routes.addTask);
+            Navigator.of(context).pushNamed(Routes.taskDetails);
           },
           taskImage: AppImages.grocery,
           taskTitle: AppStrings.dummyTaskTitle,
