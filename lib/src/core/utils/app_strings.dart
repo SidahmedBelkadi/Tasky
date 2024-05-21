@@ -43,4 +43,14 @@ class AppStrings {
   static const chooseDueDate = "Choose due date...";
   static const addTask = "Add Task";
   static const addNewTask = "Add New Task";
+  static const taskDetails = "Task Details";
+  static const edit = "Edit";
+  static const delete = "Delete";
+  static const groceryShopApp = "Grocery shopping App";
+  static const taskDetailDescriptionText =
+      "This application is designed for super shops. By using this application they can enlist all their products and can deliver. Customers will get a one-stop solution for their daily shopping.";
+  static const endDate = "End Date";
+  static const dummyId = "6640dc5e1971e94d3c98d84d";
+  static const showMore = "Show More";
+  static const showLess = "Show Less";
 }

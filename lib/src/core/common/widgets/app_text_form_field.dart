@@ -6,7 +6,8 @@ import '../../utils/app_colors.dart';
 class AppTextFormField extends StatelessWidget {
   const AppTextFormField({
     super.key,
-    required this.hint,
+    this.hint,
+    this.label,
     this.textEditingController,
     this.suffixIcon,
     this.isObsecure = false,
@@ -19,7 +20,8 @@ class AppTextFormField extends StatelessWidget {
     this.readOnly = false,
   });
 
-  final String hint;
+  final String? hint;
+  final String? label;
   final TextEditingController? textEditingController;
   final dynamic suffixIcon;
   final bool isObsecure;
@@ -39,8 +41,11 @@ class AppTextFormField extends StatelessWidget {
       controller: textEditingController,
       minLines: minLines,
       maxLines: maxLines,
+      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: AppColors.secondaryText),
       decoration: InputDecoration(
+        labelText: label,
         hintText: hint,
+        floatingLabelBehavior: label != null ? FloatingLabelBehavior.always : null,
         suffixIcon: suffixIcon != null ? _buildSuffixIcon() : null,
         filled: filled,
         fillColor: filled ? fillColor : null,
@@ -51,11 +56,16 @@ class AppTextFormField extends StatelessWidget {
     );
   }
 
-  OutlineInputBorder _buildOutlineInputBorder(Color color) {
-    return OutlineInputBorder(
-      borderSide: BorderSide(color: color),
-      borderRadius: BorderRadius.circular(12.sp),
-    );
+  InputBorder _buildOutlineInputBorder(Color color) {
+    return label != null
+        ? UnderlineInputBorder(
+            borderSide: BorderSide(color: color),
+            borderRadius: BorderRadius.circular(12.sp),
+          )
+        : OutlineInputBorder(
+            borderSide: BorderSide(color: color),
+            borderRadius: BorderRadius.circular(12.sp),
+          );
   }
 
   Widget _buildSuffixIcon() {

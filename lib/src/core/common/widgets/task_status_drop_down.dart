@@ -1,50 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_icons.dart';
-import '../../../../../core/utils/app_strings.dart';
-import '../../../../../core/utils/task_priority_enum.dart';
 
-class AddTaskPriorityDropDown extends StatelessWidget {
-  const AddTaskPriorityDropDown({
+import '../../utils/app_colors.dart';
+import '../../utils/app_icons.dart';
+import '../../utils/task_status_enum.dart';
+
+class TaskStatusDropDown extends StatelessWidget {
+  const TaskStatusDropDown({
     super.key,
-    required this.taskPriority,
+    required this.taskStatus,
     required this.onChanged,
     required this.items,
-    this.showPrefixIcon = true,
   });
 
-  final TaskPriority taskPriority;
-  final void Function(TaskPriority?)? onChanged;
-  final List<TaskPriority> items;
-  final bool showPrefixIcon;
+  final TaskStatus taskStatus;
+  final void Function(TaskStatus?)? onChanged;
+  final List<TaskStatus> items;
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       hint: Text(
-        '${taskPriority.name} ${AppStrings.priority}',
+        taskStatus.name,
         style: TextStyle(
-          color: taskPriority.color,
+          color: taskStatus.color,
           fontWeight: FontWeight.bold,
         ),
       ),
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.categorybackgroundColorGrey,
-        prefixIcon: showPrefixIcon
-            ? Image.asset(
-                AppIcons.flag,
-                height: 24.h,
-                width: 24.h,
-                color: taskPriority.color,
-              )
-            : null,
         suffixIcon: Image.asset(
           AppIcons.arrowDown,
           height: 24.h,
           width: 24.h,
-          color: taskPriority.color,
+          color: taskStatus.color,
         ),
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.categorybackgroundColorGrey),
@@ -60,10 +50,10 @@ class AddTaskPriorityDropDown extends StatelessWidget {
         ),
       ),
       iconSize: 0,
-      items: items.map((priority) {
-        return DropdownMenuItem<TaskPriority>(
-          value: priority,
-          child: Text("${priority.name} ${AppStrings.priority}"),
+      items: items.map((status) {
+        return DropdownMenuItem<TaskStatus>(
+          value: status,
+          child: Text(status.name),
         );
       }).toList(),
       onChanged: onChanged,

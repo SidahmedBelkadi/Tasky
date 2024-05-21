@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/utils/app_colors.dart';
@@ -10,6 +11,7 @@ import 'widgets_themes/text_theme.dart';
 ThemeData appTheme() {
   return ThemeData(
     brightness: Brightness.light,
+    scaffoldBackgroundColor: Colors.white,
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.deepPurple,
       brightness: Brightness.light,
@@ -29,9 +31,17 @@ ThemeData appTheme() {
     /// AppBar Theme
     appBarTheme: appBarTheme,
 
-    // Date Picker
+    /// Date Picker
     datePickerTheme: const DatePickerThemeData(
       rangeSelectionBackgroundColor: AppColors.primary,
+    ),
+
+    /// Popup Menu Theme
+    popupMenuTheme: PopupMenuThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.sp),
+      ),
+      color: Colors.white,
     ),
   );
 }

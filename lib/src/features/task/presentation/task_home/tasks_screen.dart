@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'widgets/floating_action_buttons.dart';
 
 import '../../../../core/common/widgets/app_bar.dart';
 import '../../../../core/common/widgets/app_bar_action_icon.dart';
 import '../../../../core/utils/app_icons.dart';
 import '../../../../core/utils/app_strings.dart';
 import 'widgets/categories_listview.dart';
+import 'widgets/floating_action_buttons.dart';
 import 'widgets/tasks_listview.dart';
 import 'widgets/title.dart';
 

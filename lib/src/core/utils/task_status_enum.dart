@@ -17,14 +17,16 @@ class TaskStatus {
   );
 
   static const TaskStatus inProgress = TaskStatus._(
-    AppStrings.waiting,
+    AppStrings.inProgress,
     AppColors.inProgressTextColor,
     AppColors.inProgressBackgroundColor,
   );
 
   static const TaskStatus finished = TaskStatus._(
-    AppStrings.waiting,
+    AppStrings.finished,
     AppColors.finishedTextColor,
     AppColors.finishedBackgroundColor,
   );
+
+  static const List<TaskStatus> values = [waiting, inProgress, finished];
 }

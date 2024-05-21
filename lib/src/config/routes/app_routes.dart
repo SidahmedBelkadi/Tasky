@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/src/core/animation/routes_animation_manager.dart';
-import 'package:todo_app/src/features/task/presentation/task_details.dart/task_details_screen.dart';
+import '../../core/animation/routes_animation_manager.dart';
+import '../../features/task/presentation/task_details.dart/task_details_screen.dart';
 
 import '../../core/utils/app_strings.dart';
 import '../../features/on_boarding/presentation/screens/onboarding_screen.dart';
@@ -20,6 +20,7 @@ class Routes {
 
 class AppRoutes {
   static Route? onGenerateRoute(RouteSettings routeSettings) {
+    // ignore: unused_local_variable
     final args = routeSettings.arguments;
 
     switch (routeSettings.name) {
