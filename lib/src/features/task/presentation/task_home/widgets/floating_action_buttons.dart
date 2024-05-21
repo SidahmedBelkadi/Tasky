@@ -18,6 +18,7 @@ class CustomTasksScreenFloatingActionButtons extends StatelessWidget {
           height: 50.h,
           width: 50.w,
           child: FloatingActionButton(
+            heroTag: 'qrCodeButton',
             shape: const CircleBorder(),
             elevation: 0,
             backgroundColor: AppColors.grey,
@@ -34,6 +35,7 @@ class CustomTasksScreenFloatingActionButtons extends StatelessWidget {
           height: 64.h,
           width: 64.w,
           child: FloatingActionButton(
+            heroTag: 'addTaskButton',
             shape: const CircleBorder(),
             backgroundColor: AppColors.primary,
             child: Icon(
