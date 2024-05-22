@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_app/src/core/common/widgets/female_header_image.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/common/widgets/account_question.dart';
+import '../../../../core/common/widgets/female_header_image.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/media_query_values.dart';
-import '../widgets/button.dart';
-import '../widgets/form.dart';
+import 'widgets/button.dart';
+import 'widgets/form.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});

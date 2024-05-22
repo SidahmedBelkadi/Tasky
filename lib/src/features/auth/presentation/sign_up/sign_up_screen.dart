@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/common/widgets/account_question.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../widgets/button.dart';
-import '../widgets/form.dart';
+import 'widgets/button.dart';
+import 'widgets/form.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
