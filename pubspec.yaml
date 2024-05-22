@@ -42,6 +42,7 @@ dependencies:
   pretty_qr_code: ^3.3.0
   readmore: ^3.0.0
   equatable: ^2.0.5
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:
