@@ -18,10 +18,6 @@ class SignUpForm extends StatelessWidget {
           const AppTextFormField(hint: AppStrings.name),
           SizedBox(height: 24.h),
           const IntlPhoneField(initialCountryCode: 'DZ'),
-          const AppTextFormField(
-            hint: AppStrings.password,
-            suffixIcon: Icons.visibility_outlined,
-          ),
           SizedBox(height: 24.h),
           DropdownButtonFormField(
             hint: const Text(
@@ -49,7 +45,10 @@ class SignUpForm extends StatelessWidget {
           SizedBox(height: 24.h),
           const AppTextFormField(hint: AppStrings.address),
           SizedBox(height: 24.h),
-          const AppTextFormField(hint: AppStrings.password),
+          const AppTextFormField(
+            hint: AppStrings.password,
+            suffixIcon: Icons.visibility_outlined,
+          ),
         ],
       ),
     );

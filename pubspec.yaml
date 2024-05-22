@@ -41,6 +41,7 @@ dependencies:
   dotted_border: ^2.1.0
   pretty_qr_code: ^3.3.0
   readmore: ^3.0.0
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
