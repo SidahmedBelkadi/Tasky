@@ -43,6 +43,14 @@ dependencies:
   readmore: ^3.0.0
   equatable: ^2.0.5
   dartz: ^0.10.1
+  shared_preferences: ^2.2.3
+  get_it: ^7.7.0
+  dio: ^5.4.3+1
+  connectivity_plus: ^6.0.3
+  flutter_bloc: ^8.1.5
+  bloc: ^8.1.4
+  phone_input: ^1.0.0
+  toastification: ^2.0.0
 
 dev_dependencies:
   flutter_test:

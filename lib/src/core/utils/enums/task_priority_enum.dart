@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
-import 'app_strings.dart';
+import '../resources/app_colors.dart';
+import '../resources/app_strings.dart';
 
 class TaskPriority {
   final String name;

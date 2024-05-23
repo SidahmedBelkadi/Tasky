@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:todo_app/src/core/utils/app_messages.dart';
 
 class ServerException extends Equatable implements Exception {
   final String? message;
@@ -7,40 +6,46 @@ class ServerException extends Equatable implements Exception {
   const ServerException([this.message]);
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message ?? ''];
 
   @override
   String toString() {
-    return '$message';
+    return message ?? 'ServerException';
   }
 }
 
 class FetchDataException extends ServerException {
-  const FetchDataException([message]) : super(AppMessages.errorDuringCommunication);
+  const FetchDataException([String? message]) : super(message);
 }
 
 class BadRequestException extends ServerException {
-  const BadRequestException([message]) : super(AppMessages.badRequest);
+  const BadRequestException([String? message]) : super(message);
 }
 
 class UnauthorizedException extends ServerException {
-  const UnauthorizedException([message]) : super(AppMessages.unauthorized);
+  const UnauthorizedException([String? message]) : super(message);
 }
 
 class NotFoundException extends ServerException {
-  const NotFoundException([message]) : super(AppMessages.requestedInfoNotFound);
+  const NotFoundException([String? message]) : super(message);
 }
 
 class ConflictException extends ServerException {
-  const ConflictException([message]) : super(AppMessages.conflictOccurred);
+  const ConflictException([String? message]) : super(message);
 }
 
 class InternalServerErrorException extends ServerException {
-  const InternalServerErrorException([message]) : super(AppMessages.internalServerError);
+  const InternalServerErrorException([String? message]) : super(message);
 }
 
 class NoInternetConnectionException extends ServerException {
-  const NoInternetConnectionException([message]) : super(AppMessages.noInternetConnection);
+  const NoInternetConnectionException([String? message]) : super(message);
 }
 
-class CacheException implements Exception {}
+class CancelRequestException extends ServerException {
+  const CancelRequestException([String? message]) : super(message);
+}
+
+class UnprocessableEntityException extends ServerException {
+  const UnprocessableEntityException([String? message]) : super(message);
+}

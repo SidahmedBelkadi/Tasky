@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/utils/app_icons.dart';
-import '../../../../../core/utils/media_query_values.dart';
-import '../../../../../core/utils/task_priority_enum.dart';
-import '../../../../../core/utils/task_status_enum.dart';
+import '../../../../../core/utils/enums/task_priority_enum.dart';
+import '../../../../../core/utils/enums/task_status_enum.dart';
+import '../../../../../core/utils/helpers/media_query_values.dart';
+import '../../../../../core/utils/resources/app_icons.dart';
 import 'task_description.dart';
 import 'task_priority_and_date.dart';
 import 'task_status.dart';

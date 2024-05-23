@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/common/widgets/female_header_image.dart';
-import '../../../../core/utils/media_query_values.dart';
+import '../../../../core/utils/helpers/launch_helper.dart';
+import '../../../../core/utils/helpers/media_query_values.dart';
+import '../../../../injection_container.dart' as di;
 import '../widgets/button.dart';
 import '../widgets/header_texts.dart';
 
@@ -30,6 +32,7 @@ class OnBoardingScreen extends StatelessWidget {
               /// Button
               OnBoardingButton(
                 onPressed: () {
+                  di.serviceLocator<LaunchHelper>().firstTime();
                   Navigator.of(context).pushReplacementNamed(Routes.signIn);
                 },
               ),

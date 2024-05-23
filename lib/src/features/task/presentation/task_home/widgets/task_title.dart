@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/resources/app_colors.dart';
 
 class TaskItemTitle extends StatelessWidget {
   const TaskItemTitle({

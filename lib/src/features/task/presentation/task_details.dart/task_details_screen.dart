@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 import '../../../../core/common/widgets/app_bar.dart';
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_images.dart';
-import '../../../../core/utils/app_strings.dart';
-import '../../../../core/utils/media_query_values.dart';
+import '../../../../core/utils/helpers/media_query_values.dart';
+import '../../../../core/utils/resources/app_colors.dart';
+import '../../../../core/utils/resources/app_images.dart';
+import '../../../../core/utils/resources/app_strings.dart';
 import 'widgets/description.dart';
 import 'widgets/form.dart';
 import 'widgets/title.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/common/widgets/app_elevated_button.dart';
-import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/utils/resources/app_strings.dart';
 
 class AddTaskButton extends StatelessWidget {
   const AddTaskButton({

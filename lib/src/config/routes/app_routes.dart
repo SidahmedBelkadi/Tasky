@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/animation/routes_animation_manager.dart';
-import '../../core/utils/app_strings.dart';
+import '../../core/utils/resources/app_strings.dart';
+import '../../features/auth/presentation/sign_in/sign_in_screen.dart';
+import '../../features/auth/presentation/sign_up/cubit/sign_up_cubit.dart';
+import '../../features/auth/presentation/sign_up/sign_up_screen.dart';
 import '../../features/on_boarding/presentation/screens/onboarding_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
-import '../../features/auth/presentation/sign_in/sign_in_screen.dart';
-import '../../features/auth/presentation/sign_up/sign_up_screen.dart';
 import '../../features/task/presentation/add_task/add_task_screen.dart';
 import '../../features/task/presentation/task_details.dart/task_details_screen.dart';
 import '../../features/task/presentation/task_home/tasks_screen.dart';
+import '../../injection_container.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -31,12 +34,15 @@ class AppRoutes {
           const OnBoardingScreen(),
         );
       case Routes.signIn:
-        return RoutesAnimationManager.scaleTransition(
+        return RoutesAnimationManager.slideFromRightTransition(
           const SignInScreen(),
         );
       case Routes.signUp:
-        return RoutesAnimationManager.scaleTransition(
-          const SignUpScreen(),
+        return RoutesAnimationManager.slideFromRightTransition(
+          BlocProvider(
+            create: (_) => serviceLocator<SignUpCubit>(),
+            child: const SignUpScreen(),
+          ),
         );
       case Routes.tasksHome:
         return RoutesAnimationManager.slideFromRightTransition(

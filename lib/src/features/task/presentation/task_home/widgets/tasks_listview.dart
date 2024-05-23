@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../config/routes/app_routes.dart';
-import '../../../../../core/utils/app_images.dart';
-import '../../../../../core/utils/app_strings.dart';
-import '../../../../../core/utils/task_priority_enum.dart';
-import '../../../../../core/utils/task_status_enum.dart';
+import '../../../../../core/utils/enums/task_priority_enum.dart';
+import '../../../../../core/utils/enums/task_status_enum.dart';
+import '../../../../../core/utils/resources/app_images.dart';
+import '../../../../../core/utils/resources/app_strings.dart';
 import 'task.dart';
 
 class TasksListView extends StatelessWidget {

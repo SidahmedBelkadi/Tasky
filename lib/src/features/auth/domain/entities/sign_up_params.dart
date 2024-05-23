@@ -14,4 +14,15 @@ class SignUpParams {
     required this.address,
     required this.password,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'displayName': name,
+      'phone': phoneNumber,
+      'level': experienceLevel,
+      'experienceYears': yearsOfExperience,
+      'address': address,
+      'password': password,
+    };
+  }
 }

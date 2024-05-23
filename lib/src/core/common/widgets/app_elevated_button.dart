@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../utils/app_icons.dart';
-import '../../utils/media_query_values.dart';
+import '../../utils/helpers/media_query_values.dart';
+import '../../utils/resources/app_icons.dart';
 
 class AppElevatedButton extends StatelessWidget {
   const AppElevatedButton({

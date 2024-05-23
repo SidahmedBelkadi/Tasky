@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/app_images.dart';
-import '../../utils/media_query_values.dart';
+import '../../utils/helpers/media_query_values.dart';
+import '../../utils/resources/app_images.dart';
 
 class FemaleHeaderImageBackground extends StatelessWidget {
   const FemaleHeaderImageBackground({

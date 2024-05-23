@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/common/widgets/app_text_form_field.dart';
 import '../../../../../core/common/widgets/task_priority_drop_down.dart';
 import '../../../../../core/common/widgets/task_status_drop_down.dart';
-import '../../../../../core/utils/app_icons.dart';
-import '../../../../../core/utils/app_strings.dart';
-import '../../../../../core/utils/task_priority_enum.dart';
-import '../../../../../core/utils/task_status_enum.dart';
+import '../../../../../core/utils/enums/task_priority_enum.dart';
+import '../../../../../core/utils/enums/task_status_enum.dart';
+import '../../../../../core/utils/resources/app_icons.dart';
+import '../../../../../core/utils/resources/app_strings.dart';
 
 class TaskDetailForm extends StatelessWidget {
   const TaskDetailForm({

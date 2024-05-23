@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../config/routes/app_routes.dart';
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_icons.dart';
+import '../../../../../core/utils/resources/app_colors.dart';
+import '../../../../../core/utils/resources/app_icons.dart';
 
 class CustomTasksScreenFloatingActionButtons extends StatelessWidget {
   const CustomTasksScreenFloatingActionButtons({

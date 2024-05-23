@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../utils/app_colors.dart';
+import '../../utils/enums/input_type_enum.dart';
+import '../../utils/resources/app_colors.dart';
+import '../../utils/validation/validator.dart';
 
 class AppTextFormField extends StatelessWidget {
   const AppTextFormField({
@@ -19,6 +21,9 @@ class AppTextFormField extends StatelessWidget {
     this.onSuffixTap,
     this.readOnly = false,
     this.isBold = false,
+    this.validationType = InputType.name,
+    this.isRequired = true,
+    this.keyboardType = TextInputType.text,
   });
 
   final String? hint;
@@ -34,6 +39,9 @@ class AppTextFormField extends StatelessWidget {
   final void Function()? onSuffixTap;
   final bool readOnly;
   final bool isBold;
+  final InputType validationType;
+  final bool isRequired;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +51,7 @@ class AppTextFormField extends StatelessWidget {
       controller: textEditingController,
       minLines: minLines,
       maxLines: maxLines,
+      keyboardType: keyboardType,
       style: !isBold
           ? Theme.of(context).textTheme.bodySmall!.copyWith(
                 color: AppColors.secondaryText,
@@ -65,6 +74,12 @@ class AppTextFormField extends StatelessWidget {
         border: filled ? _buildOutlineInputBorder(fillColor) : null,
         enabledBorder: filled ? _buildOutlineInputBorder(fillColor) : null,
         focusedBorder: filled ? _buildOutlineInputBorder(fillColor) : null,
+      ),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) => Validator.validate(
+        value: value ?? '',
+        type: validationType,
+        isRequired: isRequired,
       ),
     );
   }

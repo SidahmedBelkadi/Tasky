@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/app_icons.dart';
-import '../../utils/app_strings.dart';
-import '../../utils/task_priority_enum.dart';
+import '../../utils/enums/task_priority_enum.dart';
+import '../../utils/resources/app_colors.dart';
+import '../../utils/resources/app_icons.dart';
+import '../../utils/resources/app_strings.dart';
 
 class TaskPriorityDropDown extends StatelessWidget {
   const TaskPriorityDropDown({

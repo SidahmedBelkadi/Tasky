@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../core/common/widgets/app_bar.dart';
 import '../../../core/common/widgets/app_text_form_field.dart';
-import '../../../core/utils/app_icons.dart';
-import '../../../core/utils/app_strings.dart';
+import '../../../core/utils/resources/app_icons.dart';
+import '../../../core/utils/resources/app_strings.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

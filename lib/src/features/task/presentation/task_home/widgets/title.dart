@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/utils/resources/app_colors.dart';
+import '../../../../../core/utils/resources/app_strings.dart';
 
 class TasksHomeTitle extends StatelessWidget {
   const TasksHomeTitle({

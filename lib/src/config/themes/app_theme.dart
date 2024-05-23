@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../core/utils/app_colors.dart';
+import '../../core/utils/resources/app_colors.dart';
 import 'widgets_themes/app_bar.dart';
 import 'widgets_themes/elevated_button.dart';
 import 'widgets_themes/text_form_field.dart';

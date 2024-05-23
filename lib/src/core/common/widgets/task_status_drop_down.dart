@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../utils/app_colors.dart';
-import '../../utils/app_icons.dart';
-import '../../utils/task_status_enum.dart';
+import '../../utils/enums/task_status_enum.dart';
+import '../../utils/resources/app_colors.dart';
+import '../../utils/resources/app_icons.dart';
 
 class TaskStatusDropDown extends StatelessWidget {
   const TaskStatusDropDown({

@@ -2,10 +2,10 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_icons.dart';
-import '../../../../../core/utils/app_strings.dart';
-import '../../../../../core/utils/media_query_values.dart';
+import '../../../../../core/utils/helpers/media_query_values.dart';
+import '../../../../../core/utils/resources/app_colors.dart';
+import '../../../../../core/utils/resources/app_icons.dart';
+import '../../../../../core/utils/resources/app_strings.dart';
 
 class AddTaskImageField extends StatelessWidget {
   const AddTaskImageField({

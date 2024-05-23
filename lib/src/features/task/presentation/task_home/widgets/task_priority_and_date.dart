@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_icons.dart';
-import '../../../../../core/utils/task_priority_enum.dart';
+import '../../../../../core/utils/enums/task_priority_enum.dart';
+import '../../../../../core/utils/resources/app_colors.dart';
+import '../../../../../core/utils/resources/app_icons.dart';
 
 class TaskPriorityFlagAndDate extends StatelessWidget {
   const TaskPriorityFlagAndDate({

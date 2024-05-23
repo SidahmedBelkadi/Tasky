@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/utils/resources/app_strings.dart';
 import 'category_item.dart';
 
 class TaskCategoriesListView extends StatelessWidget {

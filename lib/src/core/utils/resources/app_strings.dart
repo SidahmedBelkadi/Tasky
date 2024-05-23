@@ -59,4 +59,9 @@ class AppStrings {
   static const location = "LOCATION";
   static const nameMaj = "NAME";
   static const yearsOfExpMaj = "YEARS OF EXPERIENCE";
+  static const juniorValue = "junior";
+  static const freshValue = "fresh";
+  static const fresh = "Fresh";
+  static const midLevelValue = "midLevel";
+  static const seniorValue = "senior";
 }
