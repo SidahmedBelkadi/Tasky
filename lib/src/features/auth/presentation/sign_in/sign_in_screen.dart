@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../../../../core/utils/helpers/toast_helper.dart';
+import '../../../../core/utils/resources/app_messages.dart';
+import '../../domain/entities/sign_in_params.dart';
+import 'cubit/sign_in_cubit.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/common/widgets/account_question.dart';
 import '../../../../core/common/widgets/female_header_image.dart';
@@ -44,9 +48,26 @@ class SignInScreen extends StatelessWidget {
                       SizedBox(height: 24.0.h),
 
                       // SignIn Button
-                      SignInButton(
-                        onPressed: () {
-                          Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
+                      BlocConsumer<SignInCubit, SignInState>(
+                        listener: (context, state) {
+                          if (state is SignInSuccessful) {
+                            Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
+                            AppToasts.showInfoToast(
+                                message: AppMessages.welcomeBack, context: context);
+                          } else if (state is SignInUnSuccessful) {
+                            AppToasts.showErrorToast(message: state.message, context: context);
+                          }
+                        },
+                        builder: (context, state) {
+                          if (state is SignInLoading) {
+                            return SignInButton(onPressed: () {}, isLoading: true);
+                          }
+                          return SignInButton(
+                            onPressed: () {
+                              final cubit = context.read<SignInCubit>();
+                              _signIn(context, cubit);
+                            },
+                          );
                         },
                       ),
 
@@ -71,4 +92,15 @@ class SignInScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+_signIn(BuildContext context, SignInCubit cubit) {
+  final phoneNumber = cubit.phoneController.value?.international.trim() ?? '';
+
+  final signInParams = SignInParams(
+    phoneNumber: phoneNumber,
+    password: cubit.passwordController.text.trim(),
+  );
+
+  cubit.signIn(signInParams: signInParams);
 }

@@ -3,7 +3,7 @@ import '../../domain/entities/auth_response_entity.dart';
 class AuthResponseModel extends AuthResponseEntity {
   const AuthResponseModel({
     required super.userId,
-    required super.name,
+    super.name,
     required super.accessToken,
     required super.refreshToken,
   });
@@ -11,7 +11,7 @@ class AuthResponseModel extends AuthResponseEntity {
   factory AuthResponseModel.fromJson(Map<String, dynamic> json) {
     return AuthResponseModel(
       userId: json['_id'],
-      name: json['displayName'],
+      name: json['displayName'] as String?,
       accessToken: json['access_token'],
       refreshToken: json['refresh_token'],
     );

@@ -45,7 +45,7 @@ class SignUpScreen extends StatelessWidget {
                       if (state is SignUpSuccessful) {
                         AppToasts.showSuccessToast(
                             message: AppMessages.accountCreated, context: context);
-                        Navigator.of(context).pushReplacementNamed(Routes.signIn);
+                        Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
                       } else if (state is SignUpUnSuccessful) {
                         AppToasts.showErrorToast(message: state.message, context: context);
                       }
@@ -84,19 +84,15 @@ class SignUpScreen extends StatelessWidget {
 }
 
 _signUp(BuildContext context, SignUpCubit cubit) {
-  final isValidated = cubit.formKey.currentState!.validate();
-  if (!isValidated) {
-    return;
-  }
-  final phoneNumber = cubit.phoneController.value?.international ?? '';
+  final phoneNumber = cubit.phoneController.value?.international.trim() ?? '';
 
   final signUpParams = SignUpParams(
-    name: cubit.nameController.text,
+    name: cubit.nameController.text.trim(),
     phoneNumber: phoneNumber,
-    experienceLevel: cubit.experienceLevel,
-    yearsOfExperience: cubit.experienceYearsController.text,
-    address: cubit.addressController.text,
-    password: cubit.passwordController.text,
+    experienceLevel: cubit.experienceLevel.trim(),
+    yearsOfExperience: cubit.experienceYearsController.text.trim(),
+    address: cubit.addressController.text.trim(),
+    password: cubit.passwordController.text.trim(),
   );
   cubit.signUp(signUpParams: signUpParams);
 }

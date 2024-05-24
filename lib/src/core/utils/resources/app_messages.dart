@@ -14,7 +14,8 @@ class AppMessages {
   static const internalServerError = "An internal server error occurred. Please try again later.";
   static const noInternetConnection = 'No internet connection. Please check your connection.';
   static const communicationErrorWithServer = 'A communication error occurred with the server.';
-  static const unexpectedError = 'An unexpected error occurred. Please try again.';
+  static const unexpectedError = 'An unexpected error occurred.';
 
-  static const accountCreated = "Your account has been created, sign in to continue ";
+  static const accountCreated = "Your account has been created, welcome to Tasky";
+  static const welcomeBack = "Welcome Back !!";
 }

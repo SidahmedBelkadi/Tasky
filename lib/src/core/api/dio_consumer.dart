@@ -59,22 +59,54 @@ class DioConsumer extends ApiConsumer {
   }
 
   @override
+  // Future<dynamic> post(String path,
+  //     {Map<String, dynamic>? body,
+  //     bool formDataIsEnabled = false,
+  //     Map<String, String>? headers,
+  //     Map<String, dynamic>? queryParameters}) async {
+  //   try {
+  //     debugPrint("POST Request:");
+  //     debugPrint("URL: ${client.options.baseUrl}$path");
+  //     debugPrint("Headers: ${headers ?? client.options.headers}");
+  //     debugPrint("Body: $body");
+
+  //     final response = await client.post(
+  //       path,
+  //       data: formDataIsEnabled ? FormData.fromMap(body!) : body,
+  //       options: Options(
+  //         headers: headers,
+  //       ),
+  //       queryParameters: queryParameters,
+  //     );
+  //     return response.data;
+  //   } on DioException catch (error) {
+  //     _handleDioError(error);
+  //   }
+  // }
+
   Future<dynamic> post(String path,
       {Map<String, dynamic>? body,
       bool formDataIsEnabled = false,
       Map<String, String>? headers,
-      Map<String, dynamic>? queryParameters}) async {
+      Map<String, dynamic>? queryParameters,
+      bool includeToken = true}) async {
     try {
-      debugPrint("POST Request:");
-      debugPrint("URL: ${client.options.baseUrl}$path");
-      debugPrint("Headers: ${headers ?? client.options.headers}");
-      debugPrint("Body: $body");
+      // debugPrint("POST Request:");
+      // debugPrint("URL: ${client.options.baseUrl}$path");
+      // debugPrint("Headers: ${headers ?? client.options.headers}");
+      // debugPrint("Body: $body");
+
+      // Add custom header to skip authorization if needed
+      final Map<String, String> finalHeaders = headers ?? {};
+      if (!includeToken) {
+        finalHeaders[DioInterceptor.skipAuthHeader] = 'true';
+      }
 
       final response = await client.post(
         path,
         data: formDataIsEnabled ? FormData.fromMap(body!) : body,
         options: Options(
-          headers: headers,
+          headers: finalHeaders,
         ),
         queryParameters: queryParameters,
       );
@@ -158,7 +190,7 @@ class DioConsumer extends ApiConsumer {
           case StatusCode.internalServerError:
             throw const InternalServerErrorException(AppMessages.internalServerError);
           case StatusCode.unauthorized:
-            throw const UnauthorizedException(AppMessages.unauthorized);
+            throw UnauthorizedException(errorMessage);
           case StatusCode.unprocessable:
             throw UnprocessableEntityException(errorMessage); // Show Real server message
           default:

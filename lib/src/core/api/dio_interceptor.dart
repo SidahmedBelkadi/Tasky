@@ -10,6 +10,7 @@ import 'end_points.dart';
 import 'status_code.dart';
 
 class DioInterceptor extends Interceptor {
+  static const String skipAuthHeader = 'skip-auth';
   final Dio client;
   final AuthenticationLocalDataSource authLocalDataSource;
 
@@ -22,9 +23,14 @@ class DioInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     options.headers[HttpHeaders.acceptHeader] = ContentType.json.toString();
 
-    final authResponse = authLocalDataSource.getSavedLoginCredentials();
-    if (authResponse != null) {
-      options.headers[HttpHeaders.authorizationHeader] = 'Bearer ${authResponse.accessToken}';
+    // Check if the request should skip authorization
+    if (options.headers.containsKey(skipAuthHeader)) {
+      options.headers.remove(skipAuthHeader); // Remove the custom header
+    } else {
+      final authResponse = authLocalDataSource.getSavedLoginCredentials();
+      if (authResponse != null) {
+        options.headers[HttpHeaders.authorizationHeader] = 'Bearer ${authResponse.accessToken}';
+      }
     }
 
     debugPrint('REQUEST[${options.method}] => PATH: ${options.path}');

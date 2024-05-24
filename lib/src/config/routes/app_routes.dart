@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/animation/routes_animation_manager.dart';
 import '../../core/utils/resources/app_strings.dart';
+import '../../features/auth/presentation/sign_in/cubit/sign_in_cubit.dart';
 import '../../features/auth/presentation/sign_in/sign_in_screen.dart';
+import '../../features/auth/presentation/sign_out/cubit/sign_out_cubit.dart';
 import '../../features/auth/presentation/sign_up/cubit/sign_up_cubit.dart';
 import '../../features/auth/presentation/sign_up/sign_up_screen.dart';
 import '../../features/on_boarding/presentation/screens/onboarding_screen.dart';
@@ -14,7 +16,7 @@ import '../../features/task/presentation/task_home/tasks_screen.dart';
 import '../../injection_container.dart';
 
 class Routes {
-  static const String initialRoute = '/';
+  static const String onBoarding = '/on_boarding';
   static const String signIn = '/sign_in';
   static const String signUp = '/sign_up';
   static const String tasksHome = '/tasks_home';
@@ -29,13 +31,16 @@ class AppRoutes {
     final args = routeSettings.arguments;
 
     switch (routeSettings.name) {
-      case Routes.initialRoute:
+      case Routes.onBoarding:
         return RoutesAnimationManager.fadeTransition(
           const OnBoardingScreen(),
         );
       case Routes.signIn:
         return RoutesAnimationManager.slideFromRightTransition(
-          const SignInScreen(),
+          BlocProvider(
+            create: (context) => serviceLocator<SignInCubit>(),
+            child: const SignInScreen(),
+          ),
         );
       case Routes.signUp:
         return RoutesAnimationManager.slideFromRightTransition(
@@ -46,7 +51,10 @@ class AppRoutes {
         );
       case Routes.tasksHome:
         return RoutesAnimationManager.slideFromRightTransition(
-          const TasksScreen(),
+          BlocProvider(
+            create: (context) => serviceLocator<SignOutCubit>(),
+            child: const TasksScreen(),
+          ),
         );
       case Routes.addTask:
         return RoutesAnimationManager.slideFromBottomTransition(

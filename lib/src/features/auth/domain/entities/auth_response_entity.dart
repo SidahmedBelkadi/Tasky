@@ -2,13 +2,13 @@ import 'package:equatable/equatable.dart';
 
 class AuthResponseEntity extends Equatable {
   final String userId;
-  final String name;
+  final String? name;
   final String accessToken;
   final String refreshToken;
 
   const AuthResponseEntity({
     required this.userId,
-    required this.name,
+    this.name,
     required this.accessToken,
     required this.refreshToken,
   });

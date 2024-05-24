@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/common/widgets/button_loader.dart';
+import '../../../../core/utils/helpers/dialog_helper.dart';
+import '../../../../core/utils/helpers/toast_helper.dart';
+import '../../../auth/presentation/sign_out/cubit/sign_out_cubit.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/common/widgets/app_bar.dart';
@@ -12,7 +17,9 @@ import 'widgets/tasks_listview.dart';
 import 'widgets/title.dart';
 
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({super.key});
+  const TasksScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +64,34 @@ class TasksScreen extends StatelessWidget {
           },
         ),
         SizedBox(width: 10.w),
-        AppBarActionIcon(
-          asset: AppIcons.logout,
-          onTap: () {},
+        BlocConsumer<SignOutCubit, SignOutState>(
+          listener: (context, state) {
+            if (state is SignOutSuccessful) {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                Routes.signIn,
+                (route) => false,
+              );
+            } else if (state is SignOutUnSuccessful) {
+              Navigator.of(context).pop();
+              AppToasts.showErrorToast(message: state.message, context: context);
+            }
+          },
+          builder: (context, state) {
+            if (state is SignOutLoading) {
+              Navigator.of(context).pop();
+              return const ButtonCircularProgressIndicator(height: 20, width: 20);
+            }
+            return AppBarActionIcon(
+              asset: AppIcons.logout,
+              onTap: () {
+                AppDialog.showCustomAppDialog(
+                  title: AppStrings.doYouWantToLogout,
+                  context: context,
+                  onPressed: () => context.read<SignOutCubit>().signOut(),
+                );
+              },
+            );
+          },
         ),
         SizedBox(width: 10.w),
       ],

@@ -2,6 +2,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
+import 'core/utils/helpers/route_helper.dart';
+import 'features/auth/domain/use_cases/sign_in_usecase.dart';
+import 'features/auth/domain/use_cases/sign_out.dart';
+import 'features/auth/presentation/sign_in/cubit/sign_in_cubit.dart';
+import 'features/auth/presentation/sign_out/cubit/sign_out_cubit.dart';
 import 'core/api/dio_consumer.dart';
 import 'core/api/dio_interceptor.dart';
 import 'core/utils/helpers/launch_helper.dart';
@@ -38,6 +43,13 @@ Future<void> initializeAppDependencies() async {
     () => LaunchHelper(sharedPreferences: serviceLocator()),
   );
 
+  // ================ Helpers ================ //
+
+  serviceLocator.registerLazySingleton(() => InitialRouteHelper(
+        launchHelper: serviceLocator<LaunchHelper>(),
+        authLocalDataSource: serviceLocator<AuthenticationLocalDataSource>(),
+      ));
+
   // ================ Data Sources ================ //
   serviceLocator.registerLazySingleton<AuthenticationRemoteDataSource>(
     () => AuthenticationRemoteDataSourceImpl(dioConsumer: serviceLocator()),
@@ -57,8 +69,17 @@ Future<void> initializeAppDependencies() async {
 
   // ================ Use Cases ================ //
   serviceLocator.registerLazySingleton(() => SignUpUseCase(repository: serviceLocator()));
+  serviceLocator.registerLazySingleton(() => SignInUseCase(repository: serviceLocator()));
+  serviceLocator.registerLazySingleton(() => SignOutUseCase(repository: serviceLocator()));
 
   // ================ Blocs ================ //
   serviceLocator.registerFactory(
       () => SignUpCubit(signUpUseCase: serviceLocator(), localDataSource: serviceLocator()));
+  serviceLocator.registerFactory(
+      () => SignInCubit(signInUseCase: serviceLocator(), localDataSource: serviceLocator()));
+  serviceLocator.registerFactory(() => SignOutCubit(
+        signOutUseCase: serviceLocator(),
+        localDataSource: serviceLocator(),
+        remoteDataSource: serviceLocator(),
+      ));
 }

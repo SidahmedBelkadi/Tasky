@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import '../../domain/entities/sign_in_params.dart';
 
 import '../../../../core/error/exception.dart';
 import '../../../../core/error/failure.dart';
@@ -28,6 +29,37 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         return Right(authResponseModel);
       } on ServerException catch (e) {
         return Left(ServerFailure(message: ErrorHandler.getErrorMessage(e)));
+      }
+    } else {
+      return const Left(NoInternetConnectionFailure(message: AppMessages.noInternetConnection));
+    }
+  }
+
+  @override
+  Future<Either<Failure, AuthResponseEntity>> signIn({required SignInParams signInParams}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final authResponseModel =
+            await authenticationRemoteDataSource.signIn(signInParams: signInParams);
+        return Right(authResponseModel);
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: ErrorHandler.getErrorMessage(e)));
+      }
+    } else {
+      return const Left(NoInternetConnectionFailure(message: AppMessages.noInternetConnection));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> signOut({required String token}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        await authenticationRemoteDataSource.signOut(token: token);
+        return const Right(null);
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: ErrorHandler.getErrorMessage(e)));
+      } catch (e) {
+        return Left(ServerFailure(message: e.toString()));
       }
     } else {
       return const Left(NoInternetConnectionFailure(message: AppMessages.noInternetConnection));
