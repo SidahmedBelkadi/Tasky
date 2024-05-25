@@ -65,4 +65,7 @@ class AppStrings {
   static const midLevelValue = "midLevel";
   static const seniorValue = "senior";
   static const doYouWantToLogout = "Are you sure you want to logout?";
+  static const lowValue = "low";
+  static const highValue = "high";
+  static const mediumValue = "medium";
 }

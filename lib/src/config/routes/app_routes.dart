@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/src/features/task/presentation/add_task/cubit/add_task_cubit.dart';
 
 import '../../core/animation/routes_animation_manager.dart';
 import '../../core/utils/resources/app_strings.dart';
@@ -57,17 +58,20 @@ class AppRoutes {
           ),
         );
       case Routes.addTask:
-        return RoutesAnimationManager.slideFromBottomTransition(
-          const AddTaskScreen(),
+        return RoutesAnimationManager.slideFromRightTransition(
+          BlocProvider(
+            create: (context) => serviceLocator<AddTaskCubit>(),
+            child: const AddTaskScreen(),
+          ),
         );
 
       case Routes.taskDetails:
-        return RoutesAnimationManager.slideFromBottomTransition(
+        return RoutesAnimationManager.slideFromRightTransition(
           const TaskDetailsScreen(),
         );
 
       case Routes.profile:
-        return RoutesAnimationManager.slideFromBottomTransition(
+        return RoutesAnimationManager.slideFromRightTransition(
           const ProfileScreen(),
         );
 

@@ -18,4 +18,6 @@ class AppMessages {
 
   static const accountCreated = "Your account has been created, welcome to Tasky";
   static const welcomeBack = "Welcome Back !!";
+  static const taskAdded = "Task Added Successfully. !";
+  static const inferiorDateError = "The due date cannot be less than today.. !";
 }

@@ -5,21 +5,26 @@ import '../resources/app_strings.dart';
 
 class TaskPriority {
   final String name;
+  final String value;
+
   final Color color;
 
-  const TaskPriority._(this.name, this.color);
+  const TaskPriority._(this.name, this.color, this.value);
 
   static const TaskPriority low = TaskPriority._(
     AppStrings.low,
     AppColors.lowProiorityColor,
+    AppStrings.lowValue,
   );
   static const TaskPriority medium = TaskPriority._(
     AppStrings.medium,
     AppColors.mediumProiorityColor,
+    AppStrings.mediumValue,
   );
   static const TaskPriority high = TaskPriority._(
     AppStrings.heigh,
     AppColors.highProiorityColor,
+    AppStrings.highValue,
   );
 
   static const List<TaskPriority> values = [low, medium, high];

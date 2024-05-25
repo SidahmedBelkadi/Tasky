@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../utils/enums/task_priority_enum.dart';
 import '../../utils/resources/app_colors.dart';
 import '../../utils/resources/app_icons.dart';
@@ -64,7 +63,13 @@ class TaskPriorityDropDown extends StatelessWidget {
       items: items.map((priority) {
         return DropdownMenuItem<TaskPriority>(
           value: priority,
-          child: Text("${priority.name} ${AppStrings.priority}"),
+          child: Text(
+            "${priority.name} ${AppStrings.priority}",
+            style: TextStyle(
+              color: priority.color,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         );
       }).toList(),
       onChanged: onChanged,

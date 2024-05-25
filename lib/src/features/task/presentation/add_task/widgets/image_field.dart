@@ -11,44 +11,65 @@ class AddTaskImageField extends StatelessWidget {
   const AddTaskImageField({
     super.key,
     this.onTap,
+    this.isError = false,
   });
   final void Function()? onTap;
+  final bool isError;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: SizedBox(
-        width: context.width,
-        height: 56.sp,
-        child: DottedBorder(
-          color: AppColors.primary,
-          strokeWidth: 1,
-          radius: Radius.circular(12.sp),
-          borderType: BorderType.RRect,
-          child: Center(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  AppIcons.imageIcon,
-                  height: 24.h,
-                  width: 24.h,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GestureDetector(
+          onTap: onTap,
+          child: SizedBox(
+            width: context.width,
+            height: 56.sp,
+            child: DottedBorder(
+              color: isError ? Colors.red : AppColors.primary,
+              strokeWidth: 1,
+              radius: Radius.circular(12.sp),
+              borderType: BorderType.RRect,
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      AppIcons.imageIcon,
+                      height: 24.h,
+                      width: 24.h,
+                      color: isError ? Colors.red : AppColors.primary,
+                    ),
+                    SizedBox(width: 5.w),
+                    Text(
+                      AppStrings.addImg,
+                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                            fontSize: 19,
+                            fontWeight: FontWeight.w500,
+                            color: isError ? Colors.red : AppColors.primary,
+                          ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 5.w),
-                Text(
-                  AppStrings.addImg,
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        fontSize: 19,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.primary,
-                      ),
-                ),
-              ],
+              ),
             ),
           ),
         ),
-      ),
+        if (isError)
+          const Column(
+            children: [
+              SizedBox(height: 8),
+              Padding(
+                padding: EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "The Task Image is required",
+                  style: TextStyle(fontSize: 14, color: Colors.red),
+                ),
+              )
+            ],
+          ),
+      ],
     );
   }
 }

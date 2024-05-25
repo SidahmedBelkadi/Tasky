@@ -19,4 +19,11 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
     borderRadius: BorderRadius.circular(12.0.r),
     borderSide: const BorderSide(color: AppColors.primary),
   ),
+  errorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(12.0.r),
+    borderSide: const BorderSide(
+      color: Colors.red,
+    ),
+  ),
+  errorStyle: const TextStyle(fontSize: 14, color: Colors.red),
 );

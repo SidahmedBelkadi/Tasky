@@ -6,5 +6,6 @@ class ValidationErrorMessages {
   static const String addressError = 'Address must be between 5 and 200 characters.';
   static const String yearsOfExperienceError = 'Years of experience must be a valid number.';
   static const String experienceLevel = 'Please choose your experience level.';
+  static const String taskPriority = 'Please choose the priority of your task.';
   static const String requiredError = 'This field is required.';
 }

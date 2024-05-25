@@ -2,6 +2,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
+import 'package:todo_app/src/features/task/data/data_sources/remote/tasks_remote_data_source.dart';
+import 'package:todo_app/src/features/task/data/repositories/tasks_repository_impl.dart';
+import 'package:todo_app/src/features/task/domain/repositories/tasks_repository.dart';
+import 'package:todo_app/src/features/task/domain/use_cases/create_task_use_case.dart';
+import 'package:todo_app/src/features/task/presentation/add_task/cubit/add_task_cubit.dart';
 import 'core/utils/helpers/route_helper.dart';
 import 'features/auth/domain/use_cases/sign_in_usecase.dart';
 import 'features/auth/domain/use_cases/sign_out.dart';
@@ -59,6 +64,10 @@ Future<void> initializeAppDependencies() async {
     () => AuthenticationLocalDataSourceImpl(sharedPreferences: serviceLocator()),
   );
 
+  serviceLocator.registerLazySingleton<TasksRemoteDataSource>(
+    () => TasksRemoteDataSourceImpl(dioConsumer: serviceLocator()),
+  );
+
   // ================ Repositories ================ //
   serviceLocator.registerLazySingleton<AuthenticationRepository>(
     () => AuthenticationRepositoryImpl(
@@ -67,10 +76,18 @@ Future<void> initializeAppDependencies() async {
     ),
   );
 
+  serviceLocator.registerLazySingleton<TasksRepository>(
+    () => TasksRepositioryImpl(
+      remoteDataSource: serviceLocator(),
+      networkInfo: serviceLocator(),
+    ),
+  );
+
   // ================ Use Cases ================ //
   serviceLocator.registerLazySingleton(() => SignUpUseCase(repository: serviceLocator()));
   serviceLocator.registerLazySingleton(() => SignInUseCase(repository: serviceLocator()));
   serviceLocator.registerLazySingleton(() => SignOutUseCase(repository: serviceLocator()));
+  serviceLocator.registerLazySingleton(() => CreateTaskUseCase(repository: serviceLocator()));
 
   // ================ Blocs ================ //
   serviceLocator.registerFactory(
@@ -82,4 +99,8 @@ Future<void> initializeAppDependencies() async {
         localDataSource: serviceLocator(),
         remoteDataSource: serviceLocator(),
       ));
+
+  serviceLocator.registerFactory(
+    () => AddTaskCubit(useCase: serviceLocator()),
+  );
 }

@@ -8,4 +8,7 @@ class EndPoints {
   static const String signIn = "/auth/login";
   static const String refreshToken = "/auth/refresh-token";
   static const String signOut = "/auth/logout";
+
+  // ============== Task ===================
+  static const String createTask = "/todos";
 }

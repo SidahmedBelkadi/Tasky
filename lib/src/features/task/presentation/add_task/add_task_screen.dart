@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/common/widgets/app_bar.dart';
 import '../../../../core/utils/resources/app_strings.dart';
-import 'widgets/button.dart';
 import 'widgets/form.dart';
 
 class AddTaskScreen extends StatelessWidget {
@@ -24,11 +23,6 @@ class AddTaskScreen extends StatelessWidget {
 
                 /// Task Detail Form
                 const AddTaskForm(),
-
-                /// Task Detail Button
-                AddTaskButton(
-                  onPressed: () {},
-                )
               ],
             ),
           ),

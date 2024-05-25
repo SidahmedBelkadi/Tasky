@@ -24,7 +24,7 @@ class DioInterceptor extends Interceptor {
     options.headers[HttpHeaders.acceptHeader] = ContentType.json.toString();
 
     // Check if the request should skip authorization
-    if (options.headers.containsKey(skipAuthHeader)) {
+    if (options.headers.containsKey(skipAuthHeader) || options.path == EndPoints.refreshToken) {
       options.headers.remove(skipAuthHeader); // Remove the custom header
     } else {
       final authResponse = authLocalDataSource.getSavedLoginCredentials();
@@ -73,7 +73,7 @@ class DioInterceptor extends Interceptor {
   }
 
   Future<bool> _refreshToken(AuthResponseModel authResponse) async {
-    final response = await client.post(
+    final response = await client.get(
       EndPoints.refreshToken,
       queryParameters: {
         'token': authResponse.refreshToken,

@@ -13,7 +13,7 @@ abstract class AppToasts {
       autoCloseDuration: const Duration(seconds: 5),
       showProgressBar: false,
       type: ToastificationType.success,
-      style: ToastificationStyle.minimal,
+      style: ToastificationStyle.flat,
     );
   }
 
@@ -28,11 +28,7 @@ abstract class AppToasts {
       autoCloseDuration: const Duration(seconds: 5),
       showProgressBar: false,
       type: ToastificationType.info,
-      style: ToastificationStyle.flatColored,
-      icon: const Icon(
-        Icons.check_circle,
-        color: Colors.blueAccent,
-      ),
+      style: ToastificationStyle.flat,
     );
   }
 
@@ -47,7 +43,22 @@ abstract class AppToasts {
       autoCloseDuration: const Duration(seconds: 5),
       showProgressBar: false,
       type: ToastificationType.error,
-      style: ToastificationStyle.minimal,
+      style: ToastificationStyle.flat,
+    );
+  }
+
+  static void showWarningToast({required String message, required BuildContext context}) {
+    toastification.show(
+      context: context,
+      title: const Text('Warning!'),
+      description: Text(
+        message,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      autoCloseDuration: const Duration(seconds: 5),
+      showProgressBar: false,
+      type: ToastificationType.warning,
+      style: ToastificationStyle.flat,
     );
   }
 }
