@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/src/features/task/presentation/add_task/cubit/add_task_cubit.dart';
+import 'package:todo_app/src/features/task/presentation/task_details/cubit/task_detail_cubit.dart';
+import 'package:todo_app/src/features/task/presentation/task_home/cubit/tasks_cubit.dart';
 
 import '../../core/animation/routes_animation_manager.dart';
 import '../../core/utils/resources/app_strings.dart';
@@ -12,7 +14,7 @@ import '../../features/auth/presentation/sign_up/sign_up_screen.dart';
 import '../../features/on_boarding/presentation/screens/onboarding_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/task/presentation/add_task/add_task_screen.dart';
-import '../../features/task/presentation/task_details.dart/task_details_screen.dart';
+import '../../features/task/presentation/task_details/task_details_screen.dart';
 import '../../features/task/presentation/task_home/tasks_screen.dart';
 import '../../injection_container.dart';
 
@@ -52,8 +54,15 @@ class AppRoutes {
         );
       case Routes.tasksHome:
         return RoutesAnimationManager.slideFromRightTransition(
-          BlocProvider(
-            create: (context) => serviceLocator<SignOutCubit>(),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => serviceLocator<TasksCubit>()..getAllTasks(isFirstTime: true),
+              ),
+              BlocProvider(
+                create: (context) => serviceLocator<SignOutCubit>(),
+              ),
+            ],
             child: const TasksScreen(),
           ),
         );
@@ -67,7 +76,11 @@ class AppRoutes {
 
       case Routes.taskDetails:
         return RoutesAnimationManager.slideFromRightTransition(
-          const TaskDetailsScreen(),
+          args: args,
+          BlocProvider(
+            create: (context) => serviceLocator<TaskDetailCubit>(),
+            child: const TaskDetailsScreen(),
+          ),
         );
 
       case Routes.profile:

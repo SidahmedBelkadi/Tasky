@@ -84,30 +84,76 @@ class DioConsumer extends ApiConsumer {
   //   }
   // }
 
-  Future<dynamic> post(String path,
-      {Map<String, dynamic>? body,
-      bool formDataIsEnabled = false,
-      Map<String, String>? headers,
-      Map<String, dynamic>? queryParameters,
-      bool includeToken = true}) async {
-    try {
-      // debugPrint("POST Request:");
-      // debugPrint("URL: ${client.options.baseUrl}$path");
-      // debugPrint("Headers: ${headers ?? client.options.headers}");
-      // debugPrint("Body: $body");
+  // Future<dynamic> post(
+  //   String path, {
+  //   dynamic body,
+  //   bool formDataIsEnabled = false,
+  //   Map<String, String>? headers,
+  //   Map<String, dynamic>? queryParameters,
+  //   Options? options,
+  //   bool includeToken = true,
+  // }) async {
+  //   try {
+  //     final Map<String, String> finalHeaders = headers ?? {};
+  //     if (!includeToken) {
+  //       finalHeaders[DioInterceptor.skipAuthHeader] = 'true';
+  //     }
 
-      // Add custom header to skip authorization if needed
+  //     final response = await client.post(
+  //       path,
+  //       data: formDataIsEnabled ? FormData.fromMap(body!) : body,
+  //       options: Options(
+  //         headers: finalHeaders,
+  //       ),
+  //       queryParameters: queryParameters,
+  //     );
+  //     return response.data;
+  //   } on DioException catch (error) {
+  //     _handleDioError(error);
+  //   }
+  // }
+
+  @override
+  Future<dynamic> post(
+    String path, {
+    dynamic body,
+    bool formDataIsEnabled = false,
+    Map<String, String>? headers,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    bool includeToken = true,
+  }) async {
+    try {
       final Map<String, String> finalHeaders = headers ?? {};
       if (!includeToken) {
         finalHeaders[DioInterceptor.skipAuthHeader] = 'true';
       }
 
+      // If formData is enabled, add specific headers for multipart/form-data
+      if (formDataIsEnabled) {
+        finalHeaders[HttpHeaders.contentTypeHeader] = 'multipart/form-data';
+      }
+
+      final Options finalOptions = Options(
+        headers: {...finalHeaders, ...?options?.headers},
+        method: options?.method,
+        responseType: options?.responseType,
+        contentType: options?.contentType,
+        extra: options?.extra,
+        followRedirects: options?.followRedirects,
+        receiveDataWhenStatusError: options?.receiveDataWhenStatusError,
+        validateStatus: options?.validateStatus,
+        receiveTimeout: options?.receiveTimeout,
+        sendTimeout: options?.sendTimeout,
+        requestEncoder: options?.requestEncoder,
+        responseDecoder: options?.responseDecoder,
+        listFormat: options?.listFormat,
+      );
+
       final response = await client.post(
         path,
-        data: formDataIsEnabled ? FormData.fromMap(body!) : body,
-        options: Options(
-          headers: finalHeaders,
-        ),
+        data: formDataIsEnabled ? body : jsonEncode(body),
+        options: finalOptions,
         queryParameters: queryParameters,
       );
       return response.data;

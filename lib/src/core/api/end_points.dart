@@ -10,5 +10,6 @@ class EndPoints {
   static const String signOut = "/auth/logout";
 
   // ============== Task ===================
-  static const String createTask = "/todos";
+  static const String task = "/todos";
+  static const String taskImageUpload = "/upload/image";
 }

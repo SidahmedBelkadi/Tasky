@@ -1,16 +1,13 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:todo_app/src/core/error/failure.dart';
 import 'package:todo_app/src/features/task/domain/entities/task_entity.dart';
 import 'package:todo_app/src/features/task/domain/repositories/tasks_repository.dart';
 
-class CreateTaskUseCase {
+class GetOneTaskUseCase {
   final TasksRepository repository;
-  CreateTaskUseCase({required this.repository});
+  GetOneTaskUseCase({required this.repository});
 
-  Future<Either<Failure, TaskEntity>> call(
-      {required TaskEntity taskEntity, required File imageFile}) async {
-    return await repository.create(taskEntity: taskEntity, imageFile: imageFile);
+  Future<Either<Failure, TaskEntity>> call({required String taskId}) async {
+    return await repository.one(taskId: taskId);
   }
 }

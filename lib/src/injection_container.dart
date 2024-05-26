@@ -6,7 +6,11 @@ import 'package:todo_app/src/features/task/data/data_sources/remote/tasks_remote
 import 'package:todo_app/src/features/task/data/repositories/tasks_repository_impl.dart';
 import 'package:todo_app/src/features/task/domain/repositories/tasks_repository.dart';
 import 'package:todo_app/src/features/task/domain/use_cases/create_task_use_case.dart';
+import 'package:todo_app/src/features/task/domain/use_cases/get_all_tasks.dart';
+import 'package:todo_app/src/features/task/domain/use_cases/get_one_task_use_case.dart';
 import 'package:todo_app/src/features/task/presentation/add_task/cubit/add_task_cubit.dart';
+import 'package:todo_app/src/features/task/presentation/task_details/cubit/task_detail_cubit.dart';
+import 'package:todo_app/src/features/task/presentation/task_home/cubit/tasks_cubit.dart';
 import 'core/utils/helpers/route_helper.dart';
 import 'features/auth/domain/use_cases/sign_in_usecase.dart';
 import 'features/auth/domain/use_cases/sign_out.dart';
@@ -88,6 +92,8 @@ Future<void> initializeAppDependencies() async {
   serviceLocator.registerLazySingleton(() => SignInUseCase(repository: serviceLocator()));
   serviceLocator.registerLazySingleton(() => SignOutUseCase(repository: serviceLocator()));
   serviceLocator.registerLazySingleton(() => CreateTaskUseCase(repository: serviceLocator()));
+  serviceLocator.registerLazySingleton(() => GetAllTastsUseCase(repository: serviceLocator()));
+  serviceLocator.registerLazySingleton(() => GetOneTaskUseCase(repository: serviceLocator()));
 
   // ================ Blocs ================ //
   serviceLocator.registerFactory(
@@ -102,5 +108,13 @@ Future<void> initializeAppDependencies() async {
 
   serviceLocator.registerFactory(
     () => AddTaskCubit(useCase: serviceLocator()),
+  );
+
+  serviceLocator.registerFactory(
+    () => TasksCubit(useCase: serviceLocator()),
+  );
+
+  serviceLocator.registerFactory(
+    () => TaskDetailCubit(useCase: serviceLocator()),
   );
 }

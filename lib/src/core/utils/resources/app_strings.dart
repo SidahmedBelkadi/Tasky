@@ -24,6 +24,11 @@ class AppStrings {
   static const tasks = "Tasks";
   static const all = "All";
   static const inProgress = "InProgress";
+  static const inProgressCategory = "inprogress";
+  static const allCategory = "all";
+  static const waitingCategory = "waiting";
+  static const finishedCategory = "finished";
+
   static const waiting = "Waiting";
   static const finished = "Finished";
   static const dummyTastText =

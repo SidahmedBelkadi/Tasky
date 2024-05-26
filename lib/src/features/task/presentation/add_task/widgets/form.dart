@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_app/src/config/routes/app_routes.dart';
 import 'package:todo_app/src/core/utils/enums/input_type_enum.dart';
 import 'package:todo_app/src/core/utils/helpers/image_picker_helper.dart';
 import 'package:todo_app/src/core/utils/helpers/media_query_values.dart';
@@ -56,13 +57,14 @@ class _AddTaskFormState extends State<AddTaskForm> {
       final today = DateTime.now();
       final pickedDateOnly = DateTime(pickedDate.year, pickedDate.month, pickedDate.day);
       final todayOnly = DateTime(today.year, today.month, today.day);
+
       if (pickedDateOnly.isBefore(todayOnly)) {
         if (mounted) {
           AppToasts.showErrorToast(message: AppMessages.inferiorDateError, context: context);
         }
       } else {
         setState(() {
-          dateController.text = "${pickedDate.toLocal()}".split(' ')[0];
+          dateController.text = "${pickedDateOnly.toLocal()}".split(' ')[0];
         });
       }
     }
@@ -77,15 +79,13 @@ class _AddTaskFormState extends State<AddTaskForm> {
       return;
     }
 
-    final String fileName = "${DateTime.now().toString()}${p.extension(_image!.path)}";
-
     final taskEntity = TaskEntity(
-        image: fileName,
+        image: _image!.path,
         title: titleController.text.trim(),
         description: descController.text.trim(),
         priority: _selectedPriority.value);
 
-    context.read<AddTaskCubit>().create(taskEntity: taskEntity);
+    context.read<AddTaskCubit>().create(taskEntity: taskEntity, imageFile: _image!);
   }
 
   @override
@@ -168,7 +168,7 @@ class _AddTaskFormState extends State<AddTaskForm> {
               }
               if (state is AddTaskSuccessful) {
                 AppToasts.showSuccessToast(message: AppMessages.taskAdded, context: context);
-                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
               }
             },
             builder: (context, state) {

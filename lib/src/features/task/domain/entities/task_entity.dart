@@ -1,5 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 
 class TaskEntity extends Equatable {
   final String? id;
@@ -39,4 +39,11 @@ class TaskEntity extends Equatable {
 
   @override
   bool get stringify => true;
+
+  String get formattedUpdatedAt {
+    if (updatedAt == null) return 'N/A';
+    final dateTime = DateTime.tryParse(updatedAt!);
+    if (dateTime == null) return 'Invalid Date';
+    return DateFormat('dd/MM/yyyy').format(dateTime);
+  }
 }

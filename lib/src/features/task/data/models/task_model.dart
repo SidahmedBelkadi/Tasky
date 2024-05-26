@@ -57,4 +57,28 @@ class TaskModel extends TaskEntity {
       updatedAt: entity.updatedAt,
     );
   }
+
+  TaskModel copyWith({
+    String? id,
+    String? image,
+    String? title,
+    String? description,
+    String? priority,
+    String? status,
+    String? user,
+    String? createdAt,
+    String? updatedAt,
+  }) {
+    return TaskModel(
+      id: id ?? this.id,
+      image: image ?? this.image,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      priority: priority ?? this.priority,
+      status: status ?? this.status,
+      user: user ?? this.user,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 }

@@ -15,8 +15,8 @@ class ButtonCircularProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     if (height != null && width != null) {
       return SizedBox(
-        height: height!.h,
-        width: width!.w,
+        height: height!.sp,
+        width: width!.sp,
         child: CircularProgressIndicator.adaptive(
           backgroundColor: Colors.white,
           strokeWidth: 6.sp,

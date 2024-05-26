@@ -29,3 +29,16 @@ class TaskPriority {
 
   static const List<TaskPriority> values = [low, medium, high];
 }
+
+TaskPriority getTaskPriorityFromString(String priority) {
+  switch (priority.toLowerCase()) {
+    case 'low':
+      return TaskPriority.low;
+    case 'medium':
+      return TaskPriority.medium;
+    case 'high':
+      return TaskPriority.high;
+    default:
+      return TaskPriority.medium;
+  }
+}

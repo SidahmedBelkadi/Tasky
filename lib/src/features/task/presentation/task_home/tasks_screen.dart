@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_app/src/core/common/widgets/app_bar_action_icon.dart';
+import 'package:todo_app/src/core/utils/resources/app_colors.dart';
+import 'package:todo_app/src/core/utils/resources/app_strings.dart';
+import 'package:todo_app/src/features/task/presentation/task_home/cubit/tasks_cubit.dart';
 import '../../../../core/common/widgets/button_loader.dart';
 import '../../../../core/utils/helpers/dialog_helper.dart';
 import 'package:todo_app/src/core/utils/helpers/toast_helper.dart';
@@ -8,18 +12,14 @@ import 'package:todo_app/src/features/auth/presentation/sign_out/cubit/sign_out_
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/common/widgets/app_bar.dart';
-import '../../../../core/common/widgets/app_bar_action_icon.dart';
 import '../../../../core/utils/resources/app_icons.dart';
-import '../../../../core/utils/resources/app_strings.dart';
 import 'widgets/categories_listview.dart';
 import 'widgets/floating_action_buttons.dart';
 import 'widgets/tasks_listview.dart';
 import 'widgets/title.dart';
 
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({
-    super.key,
-  });
+  const TasksScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +42,8 @@ class TasksScreen extends StatelessWidget {
             SizedBox(height: 32.h),
 
             /// Tasks ListView
-            const Expanded(
-              child: TasksListView(),
+            Expanded(
+              child: const TasksListView(),
             ),
           ],
         ),

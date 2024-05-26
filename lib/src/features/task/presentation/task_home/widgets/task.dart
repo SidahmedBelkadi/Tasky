@@ -20,6 +20,7 @@ class TaskItem extends StatelessWidget {
     required this.taskPriority,
     required this.taskStatus,
     required this.taskDate,
+    this.isNetworkImage = false,
   });
 
   final void Function()? onTap;
@@ -29,6 +30,7 @@ class TaskItem extends StatelessWidget {
   final TaskPriority taskPriority;
   final TaskStatus taskStatus;
   final String taskDate;
+  final bool isNetworkImage;
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +42,24 @@ class TaskItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            taskImage,
-            height: 64.sp,
-            width: 64.sp,
-            fit: BoxFit.fill,
-          ),
+          !isNetworkImage
+              ? Image.asset(
+                  taskImage,
+                  height: 64.sp,
+                  width: 64.sp,
+                  fit: BoxFit.cover,
+                )
+              : Image.network(
+                  taskImage,
+                  height: 64.sp,
+                  width: 64.sp,
+                  fit: BoxFit.cover,
+                ),
           SizedBox(width: 8.w),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

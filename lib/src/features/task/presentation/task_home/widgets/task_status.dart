@@ -21,7 +21,7 @@ class TaskItemStatus extends StatelessWidget {
         color: taskStatus.backgroundColor,
       ),
       child: Text(
-        AppStrings.waiting,
+        taskStatus.name,
         style: Theme.of(context).textTheme.labelMedium!.copyWith(color: taskStatus.color),
       ),
     );

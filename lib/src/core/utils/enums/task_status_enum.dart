@@ -30,3 +30,16 @@ class TaskStatus {
 
   static const List<TaskStatus> values = [waiting, inProgress, finished];
 }
+
+TaskStatus getTaskStatusFromString(String status) {
+  switch (status.toLowerCase()) {
+    case 'waiting':
+      return TaskStatus.waiting;
+    case 'inprogress':
+      return TaskStatus.inProgress;
+    case 'finished':
+      return TaskStatus.finished;
+    default:
+      return TaskStatus.waiting;
+  }
+}
