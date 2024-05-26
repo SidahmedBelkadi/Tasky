@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:todo_app/src/core/api/end_points.dart';
 import 'package:todo_app/src/core/common/widgets/button_loader.dart';
 import 'package:todo_app/src/core/utils/enums/task_status_enum.dart';
@@ -61,43 +62,54 @@ class TasksListView extends StatelessWidget {
                   onRefresh: () async {
                     await context.read<TasksCubit>().getAllTasks(isFirstTime: true);
                   },
-                  child: ListView.builder(
-                    itemCount: tasks.length + 1,
-                    itemBuilder: (_, int index) {
-                      if (index == tasks.length) {
-                        if (state is FetchingMoreTasks) {
-                          return const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Text("Getting more old Tasks ..."),
-                            ),
-                          );
-                        } else if (state is GetAllTasksSuccessfully && !state.hasMoreTasks) {
-                          return const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Text("No more tasks."),
-                            ),
-                          );
+                  child: AnimationLimiter(
+                    child: ListView.builder(
+                      itemCount: tasks.length + 1,
+                      itemBuilder: (_, int index) {
+                        if (index == tasks.length) {
+                          if (state is FetchingMoreTasks) {
+                            return const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Text("Getting more old Tasks ..."),
+                              ),
+                            );
+                          } else if (state is GetAllTasksSuccessfully && !state.hasMoreTasks) {
+                            return const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Text("No more tasks."),
+                              ),
+                            );
+                          }
+                          return const SizedBox.shrink();
                         }
-                        return const SizedBox.shrink();
-                      }
 
-                      final TaskEntity task = tasks[index];
-                      return TaskItem(
-                        onTap: () {
-                          Navigator.of(context)
-                              .pushNamed(Routes.taskDetails, arguments: {'id': task.id});
-                        },
-                        taskImage: "${EndPoints.baseUrl}/images/${task.image}",
-                        isNetworkImage: true,
-                        taskTitle: task.title,
-                        taskDesc: task.description,
-                        taskPriority: getTaskPriorityFromString(task.priority),
-                        taskStatus: getTaskStatusFromString(task.status ?? "waiting"),
-                        taskDate: task.formattedUpdatedAt,
-                      );
-                    },
+                        final TaskEntity task = tasks[index];
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 500),
+                          child: SlideAnimation(
+                            verticalOffset: -200,
+                            child: FadeInAnimation(
+                              child: TaskItem(
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .pushNamed(Routes.taskDetails, arguments: {'id': task.id});
+                                },
+                                taskImage: "${EndPoints.baseUrl}/images/${task.image}",
+                                isNetworkImage: true,
+                                taskTitle: task.title,
+                                taskDesc: task.description,
+                                taskPriority: getTaskPriorityFromString(task.priority),
+                                taskStatus: getTaskStatusFromString(task.status ?? "waiting"),
+                                taskDate: task.formattedUpdatedAt,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               );

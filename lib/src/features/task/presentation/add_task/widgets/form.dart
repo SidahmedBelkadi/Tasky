@@ -18,7 +18,6 @@ import '../../../../../core/utils/resources/app_icons.dart';
 import '../../../../../core/utils/resources/app_strings.dart';
 import 'image_field.dart';
 import 'label.dart';
-import 'package:path/path.dart' as p;
 
 class AddTaskForm extends StatefulWidget {
   const AddTaskForm({

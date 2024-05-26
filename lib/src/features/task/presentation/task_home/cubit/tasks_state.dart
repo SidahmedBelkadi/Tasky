@@ -10,15 +10,13 @@ abstract class TasksState extends Equatable {
 }
 
 class TasksInitial extends TasksState {
-  const TasksInitial({required String selectedCategory})
-      : super(selectedCategory: selectedCategory);
+  const TasksInitial({required super.selectedCategory});
 }
 
 abstract class TasksWithData extends TasksState {
   final List<TaskEntity> tasks;
 
-  const TasksWithData(this.tasks, {required String selectedCategory})
-      : super(selectedCategory: selectedCategory);
+  const TasksWithData(this.tasks, {required super.selectedCategory});
 
   @override
   List<Object> get props => [tasks, selectedCategory];
@@ -38,8 +36,7 @@ class GetAllTasksSuccessfully extends TasksWithData {
 }
 
 class FetchingMoreTasks extends TasksWithData {
-  const FetchingMoreTasks(List<TaskEntity> tasks, {required String selectedCategory})
-      : super(tasks, selectedCategory: selectedCategory);
+  const FetchingMoreTasks(super.tasks, {required super.selectedCategory});
 
   @override
   List<Object> get props => [tasks, selectedCategory];
@@ -50,14 +47,13 @@ class GetAllTasksUnSuccessfully extends TasksState {
 
   const GetAllTasksUnSuccessfully({
     required this.message,
-    required String selectedCategory,
-  }) : super(selectedCategory: selectedCategory);
+    required super.selectedCategory,
+  });
 
   @override
   List<Object> get props => [message, selectedCategory];
 }
 
 class GetAllTasksLoading extends TasksState {
-  const GetAllTasksLoading({required String selectedCategory})
-      : super(selectedCategory: selectedCategory);
+  const GetAllTasksLoading({required super.selectedCategory});
 }

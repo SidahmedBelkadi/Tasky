@@ -14,7 +14,7 @@ class TasksCubit extends Cubit<TasksState> {
   String selectedCategory = AppStrings.allCategory;
 
   TasksCubit({required this.useCase})
-      : super(TasksInitial(selectedCategory: AppStrings.allCategory));
+      : super(const TasksInitial(selectedCategory: AppStrings.allCategory));
 
   Future<void> getAllTasks(
       {bool isFirstTime = false, bool isFetchingMore = false, String? category}) async {
@@ -29,7 +29,7 @@ class TasksCubit extends Cubit<TasksState> {
       emit(GetAllTasksLoading(selectedCategory: selectedCategory));
       currentPage = 1;
       hasMoreTasks = true;
-    } else if (isFetchingMore) {
+    } else if (isFetchingMore && state is TasksWithData) {
       emit(FetchingMoreTasks((state as TasksWithData).tasks, selectedCategory: selectedCategory));
     }
 

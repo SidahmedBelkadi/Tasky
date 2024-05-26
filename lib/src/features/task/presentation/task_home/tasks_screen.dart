@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/src/core/common/widgets/app_bar_action_icon.dart';
-import 'package:todo_app/src/core/utils/resources/app_colors.dart';
 import 'package:todo_app/src/core/utils/resources/app_strings.dart';
-import 'package:todo_app/src/features/task/presentation/task_home/cubit/tasks_cubit.dart';
 import '../../../../core/common/widgets/button_loader.dart';
 import '../../../../core/utils/helpers/dialog_helper.dart';
 import 'package:todo_app/src/core/utils/helpers/toast_helper.dart';
@@ -42,8 +40,8 @@ class TasksScreen extends StatelessWidget {
             SizedBox(height: 32.h),
 
             /// Tasks ListView
-            Expanded(
-              child: const TasksListView(),
+            const Expanded(
+              child: TasksListView(),
             ),
           ],
         ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/enums/task_status_enum.dart';
-import '../../../../../core/utils/resources/app_strings.dart';
 
 class TaskItemStatus extends StatelessWidget {
   const TaskItemStatus({
