@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:todo_app/src/features/task/domain/entities/task_entity.dart';
-import 'package:todo_app/src/features/task/domain/use_cases/create_task_use_case.dart';
+import '../../../domain/entities/task_entity.dart';
+import '../../../domain/use_cases/create_task_use_case.dart';
 
 part 'add_task_state.dart';
 

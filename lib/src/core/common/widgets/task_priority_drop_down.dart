@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../utils/enums/task_priority_enum.dart';
 import '../../utils/resources/app_colors.dart';
 import '../../utils/resources/app_icons.dart';

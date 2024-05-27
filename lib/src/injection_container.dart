@@ -2,15 +2,16 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
-import 'package:todo_app/src/features/task/data/data_sources/remote/tasks_remote_data_source.dart';
-import 'package:todo_app/src/features/task/data/repositories/tasks_repository_impl.dart';
-import 'package:todo_app/src/features/task/domain/repositories/tasks_repository.dart';
-import 'package:todo_app/src/features/task/domain/use_cases/create_task_use_case.dart';
-import 'package:todo_app/src/features/task/domain/use_cases/get_all_tasks.dart';
-import 'package:todo_app/src/features/task/domain/use_cases/get_one_task_use_case.dart';
-import 'package:todo_app/src/features/task/presentation/add_task/cubit/add_task_cubit.dart';
-import 'package:todo_app/src/features/task/presentation/task_details/cubit/task_detail_cubit.dart';
-import 'package:todo_app/src/features/task/presentation/task_home/cubit/tasks_cubit.dart';
+import 'features/task/data/data_sources/remote/tasks_remote_data_source.dart';
+import 'features/task/data/repositories/tasks_repository_impl.dart';
+import 'features/task/domain/repositories/tasks_repository.dart';
+import 'features/task/domain/use_cases/create_task_use_case.dart';
+import 'features/task/domain/use_cases/delete_task_use_case.dart';
+import 'features/task/domain/use_cases/get_all_tasks.dart';
+import 'features/task/domain/use_cases/get_one_task_use_case.dart';
+import 'features/task/presentation/add_task/cubit/add_task_cubit.dart';
+import 'features/task/presentation/task_details/cubit/task_detail_cubit.dart';
+import 'features/task/presentation/task_home/cubit/tasks_cubit.dart';
 import 'core/utils/helpers/route_helper.dart';
 import 'features/auth/domain/use_cases/sign_in_usecase.dart';
 import 'features/auth/domain/use_cases/sign_out.dart';
@@ -94,6 +95,7 @@ Future<void> initializeAppDependencies() async {
   serviceLocator.registerLazySingleton(() => CreateTaskUseCase(repository: serviceLocator()));
   serviceLocator.registerLazySingleton(() => GetAllTastsUseCase(repository: serviceLocator()));
   serviceLocator.registerLazySingleton(() => GetOneTaskUseCase(repository: serviceLocator()));
+  serviceLocator.registerLazySingleton(() => DeleteTaskUseCase(repository: serviceLocator()));
 
   // ================ Blocs ================ //
   serviceLocator.registerFactory(
@@ -115,6 +117,6 @@ Future<void> initializeAppDependencies() async {
   );
 
   serviceLocator.registerFactory(
-    () => TaskDetailCubit(useCase: serviceLocator()),
+    () => TaskDetailCubit(getTaskDetailUseCase: serviceLocator(), deleteUseCase: serviceLocator()),
   );
 }

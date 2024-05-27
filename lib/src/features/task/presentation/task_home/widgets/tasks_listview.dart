@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:todo_app/src/core/api/end_points.dart';
-import 'package:todo_app/src/core/common/widgets/button_loader.dart';
-import 'package:todo_app/src/core/utils/enums/task_status_enum.dart';
-import 'package:todo_app/src/core/utils/resources/app_messages.dart';
-import 'package:todo_app/src/features/task/domain/entities/task_entity.dart';
-import 'package:todo_app/src/features/task/presentation/task_home/cubit/tasks_cubit.dart';
+import '../../../../../core/api/end_points.dart';
+import '../../../../../core/common/widgets/button_loader.dart';
+import '../../../../../core/utils/enums/task_status_enum.dart';
+import '../../../../../core/utils/helpers/toast_helper.dart';
+import '../../../../../core/utils/resources/app_messages.dart';
+import '../../../domain/entities/task_entity.dart';
+import '../cubit/tasks_cubit.dart';
 
 import '../../../../../config/routes/app_routes.dart';
 import '../../../../../core/utils/enums/task_priority_enum.dart';
@@ -20,7 +21,7 @@ class TasksListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TasksCubit, TasksState>(
+    return BlocConsumer<TasksCubit, TasksState>(
       builder: (context, state) {
         if (state is GetAllTasksLoading) {
           return const Center(
@@ -71,7 +72,7 @@ class TasksListView extends StatelessWidget {
                             return const Center(
                               child: Padding(
                                 padding: EdgeInsets.all(12.0),
-                                child: Text("Getting more old Tasks ..."),
+                                child: CircularProgressIndicator(),
                               ),
                             );
                           } else if (state is GetAllTasksSuccessfully && !state.hasMoreTasks) {
@@ -90,7 +91,7 @@ class TasksListView extends StatelessWidget {
                           position: index,
                           duration: const Duration(milliseconds: 500),
                           child: SlideAnimation(
-                            verticalOffset: -200,
+                            verticalOffset: -100,
                             child: FadeInAnimation(
                               child: TaskItem(
                                 onTap: () {
@@ -121,13 +122,18 @@ class TasksListView extends StatelessWidget {
           return Center(
             child: Text(
               AppMessages.errorDuringCommunication,
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
           );
         }
 
         return const SizedBox();
+      },
+      listener: (BuildContext context, TasksState state) {
+        if (state is GetAllTasksUnSuccessfully) {
+          AppToasts.showErrorToast(message: state.message, context: context);
+        }
       },
     );
   }

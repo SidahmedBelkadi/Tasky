@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import '../../domain/entities/sign_in_params.dart';
 
 import '../../../../core/error/exception.dart';
 import '../../../../core/error/failure.dart';
@@ -7,6 +6,7 @@ import '../../../../core/utils/handlers/error_handler.dart';
 import '../../../../core/utils/networking/network_info.dart';
 import '../../../../core/utils/resources/app_messages.dart';
 import '../../domain/entities/auth_response_entity.dart';
+import '../../domain/entities/sign_in_params.dart';
 import '../../domain/entities/sign_up_params.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../data_sources/remote/authentication_remote_data_source.dart';

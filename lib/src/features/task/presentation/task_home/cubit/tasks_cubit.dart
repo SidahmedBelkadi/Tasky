@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:todo_app/src/core/utils/resources/app_strings.dart';
-import 'package:todo_app/src/features/task/domain/entities/task_entity.dart';
-import 'package:todo_app/src/features/task/domain/use_cases/get_all_tasks.dart';
+import '../../../../../core/utils/resources/app_strings.dart';
+import '../../../domain/entities/task_entity.dart';
+import '../../../domain/use_cases/get_all_tasks.dart';
 
 part 'tasks_state.dart';
 

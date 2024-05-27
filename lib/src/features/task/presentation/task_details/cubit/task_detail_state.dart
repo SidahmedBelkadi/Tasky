@@ -28,3 +28,16 @@ final class GetTaskDetailUnSuccessful extends TaskDetailState {
 }
 
 final class GetTaskDetailLoading extends TaskDetailState {}
+
+final class DeleteTaskSuccessful extends TaskDetailState {}
+
+final class DeleteTaskUnSuccessful extends TaskDetailState {
+  final String message;
+
+  const DeleteTaskUnSuccessful({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+final class DeleteTaskLoading extends TaskDetailState {}

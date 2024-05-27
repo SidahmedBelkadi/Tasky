@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/src/core/common/widgets/button_loader.dart';
+import '../../../../../core/common/widgets/button_loader.dart';
 
 import '../../../../../core/common/widgets/app_elevated_button.dart';
 import '../../../../../core/utils/resources/app_strings.dart';

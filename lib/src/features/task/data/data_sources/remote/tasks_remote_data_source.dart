@@ -3,14 +3,15 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:todo_app/src/core/api/dio_consumer.dart';
-import 'package:todo_app/src/core/api/end_points.dart';
-import 'package:todo_app/src/features/task/data/models/task_model.dart';
+import '../../../../../core/api/dio_consumer.dart';
+import '../../../../../core/api/end_points.dart';
+import '../../models/task_model.dart';
 
 abstract class TasksRemoteDataSource {
   Future<TaskModel> create({required TaskModel taskModel, required File imageFile});
   Future<List<TaskModel>> read({required int page});
   Future<TaskModel> one({required String taskId});
+  Future<void> delete({required String taskId});
 }
 
 class TasksRemoteDataSourceImpl implements TasksRemoteDataSource {
@@ -55,5 +56,10 @@ class TasksRemoteDataSourceImpl implements TasksRemoteDataSource {
     final response = await dioConsumer.get("${EndPoints.task}/$taskId");
     final decodedResponse = jsonDecode(response);
     return TaskModel.fromJson(decodedResponse);
+  }
+
+  @override
+  Future<void> delete({required String taskId}) async {
+    await dioConsumer.delete("${EndPoints.task}/$taskId");
   }
 }

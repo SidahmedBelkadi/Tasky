@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:todo_app/src/core/error/failure.dart';
-import 'package:todo_app/src/core/utils/networking/network_info.dart';
-import 'package:todo_app/src/core/utils/resources/app_messages.dart';
-import 'package:todo_app/src/features/task/data/data_sources/remote/tasks_remote_data_source.dart';
-import 'package:todo_app/src/features/task/data/models/task_model.dart';
-import 'package:todo_app/src/features/task/domain/entities/task_entity.dart';
-import 'package:todo_app/src/features/task/domain/repositories/tasks_repository.dart';
+import '../../../../core/error/failure.dart';
+import '../../../../core/utils/networking/network_info.dart';
+import '../../../../core/utils/resources/app_messages.dart';
+import '../data_sources/remote/tasks_remote_data_source.dart';
+import '../models/task_model.dart';
+import '../../domain/entities/task_entity.dart';
+import '../../domain/repositories/tasks_repository.dart';
 
 class TasksRepositioryImpl implements TasksRepository {
   final NetworkInfo networkInfo;
@@ -53,6 +53,19 @@ class TasksRepositioryImpl implements TasksRepository {
       try {
         final TaskEntity task = await remoteDataSource.one(taskId: taskId);
         return Right(task);
+      } catch (e) {
+        return Left(ServerFailure(message: e.toString()));
+      }
+    }
+    return const Left(NoInternetConnectionFailure(message: AppMessages.noInternetConnection));
+  }
+
+  @override
+  Future<Either<Failure, Unit>> delete({required String taskId}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        await remoteDataSource.delete(taskId: taskId);
+        return const Right(unit);
       } catch (e) {
         return Left(ServerFailure(message: e.toString()));
       }

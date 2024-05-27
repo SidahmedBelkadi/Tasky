@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
-import 'package:todo_app/src/core/api/end_points.dart';
-import 'package:todo_app/src/features/task/domain/entities/task_entity.dart';
-import 'package:todo_app/src/features/task/presentation/task_details/cubit/task_detail_cubit.dart';
+import '../../../../config/routes/app_routes.dart';
+import '../../../../core/api/end_points.dart';
+import '../../../../core/common/widgets/button_loader.dart';
+import '../../../../core/utils/helpers/toast_helper.dart';
+import '../../../../core/utils/resources/app_messages.dart';
+import '../../domain/entities/task_entity.dart';
+import 'cubit/task_detail_cubit.dart';
 
 import '../../../../core/common/widgets/app_bar.dart';
 import '../../../../core/utils/helpers/media_query_values.dart';
@@ -23,112 +27,138 @@ class TaskDetailsScreen extends StatefulWidget {
 
 class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
   late TaskEntity task;
+  late String taskId;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final cubit = context.read<TaskDetailCubit>();
-    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    final taskId = args?['id'];
-
-    if (taskId != null) {
-      cubit.getTaskDetails(taskId: taskId);
-    }
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+      taskId = args?['id'];
+      context.read<TaskDetailCubit>().getTaskDetails(taskId: taskId);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildTaskDetailAppBar(),
-      body: BlocBuilder<TaskDetailCubit, TaskDetailState>(
+      appBar: CustomTasksAppBar(
+        title: AppStrings.taskDetails,
+        showLeading: true,
+        actions: [
+          BlocConsumer<TaskDetailCubit, TaskDetailState>(
+            builder: (context, state) {
+              if (state is DeleteTaskLoading) {
+                return const ButtonCircularProgressIndicator(height: 16, width: 16);
+              }
+              return PopupMenuButton(
+                onSelected: (value) {
+                  if (value == AppStrings.edit.toLowerCase()) {
+                    // Hanlde if edit
+                  } else if (value == AppStrings.delete.toLowerCase()) {
+                    context.read<TaskDetailCubit>().deleteTask(taskId: taskId);
+                  }
+                },
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: AppStrings.edit.toLowerCase(),
+                    child: Text(
+                      AppStrings.edit,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: AppStrings.delete.toLowerCase(),
+                    child: Text(
+                      AppStrings.delete,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color: AppColors.waitingTextColor,
+                          ),
+                    ),
+                  ),
+                ],
+              );
+            },
+            listener: (context, state) {
+              if (state is DeleteTaskSuccessful) {
+                Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
+              }
+              if (state is DeleteTaskUnSuccessful) {
+                AppToasts.showErrorToast(message: state.message, context: context);
+              }
+            },
+          ),
+        ],
+      ),
+      body: BlocConsumer<TaskDetailCubit, TaskDetailState>(
         builder: (context, state) {
           if (state is GetTaskDetailLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is GetTaskDetailSuccessful) {
             task = state.taskEntity;
-            return buildTaskDetails(context, task: task);
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// Image
+                  Image.network(
+                    "${EndPoints.baseUrl}/images/${task.image}",
+                    height: 250.sp,
+                    width: context.width,
+                    fit: BoxFit.fill,
+                  ),
+
+                  SizedBox(height: 8.h),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 22.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        /// Title
+                        TaskDetailTitle(title: task.title),
+
+                        SizedBox(height: 10.h),
+
+                        /// Description
+                        TaskDetailDescription(desc: task.description),
+                        SizedBox(height: 24.h),
+
+                        /// Form
+                        TaskDetailForm(task: task),
+
+                        SizedBox(height: 32.h),
+
+                        /// Qr Code
+                        TaskQrCode(data: task.id ?? ''),
+
+                        SizedBox(height: 32.h),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
           } else if (state is GetTaskDetailUnSuccessful) {
-            return Center(child: Text(state.message));
+            return Padding(
+              padding: EdgeInsets.all(16.sp),
+              child: Center(
+                child: Text(
+                  AppMessages.errorDuringCommunication,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
           }
           return const SizedBox();
         },
+        listener: (BuildContext context, TaskDetailState state) {
+          if (state is GetTaskDetailUnSuccessful) {
+            AppToasts.showErrorToast(message: state.message, context: context);
+          }
+        },
       ),
-    );
-  }
-
-  SingleChildScrollView buildTaskDetails(BuildContext context, {required TaskEntity task}) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          /// Image
-          Image.network(
-            "${EndPoints.baseUrl}/images/${task.image}",
-            height: 250.sp,
-            width: context.width,
-            fit: BoxFit.fill,
-          ),
-
-          SizedBox(height: 8.h),
-
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 22.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /// Title
-                TaskDetailTitle(title: task.title),
-
-                SizedBox(height: 10.h),
-
-                /// Description
-                TaskDetailDescription(desc: task.description),
-                SizedBox(height: 24.h),
-
-                /// Form
-                TaskDetailForm(task: task),
-
-                SizedBox(height: 32.h),
-
-                /// Qr Code
-                TaskQrCode(data: task.id ?? ''),
-
-                SizedBox(height: 32.h),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// Function That build the appbar
-  CustomTasksAppBar buildTaskDetailAppBar() {
-    return CustomTasksAppBar(
-      title: AppStrings.taskDetails,
-      showLeading: true,
-      actions: [
-        PopupMenuButton(
-          itemBuilder: (context) => [
-            PopupMenuItem(
-              child: Text(
-                AppStrings.edit,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              onTap: () {},
-            ),
-            PopupMenuItem(
-              child: Text(
-                AppStrings.delete,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.waitingTextColor,
-                    ),
-              ),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

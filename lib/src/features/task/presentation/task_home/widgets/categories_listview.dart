@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_app/src/features/task/presentation/task_home/cubit/tasks_cubit.dart';
 
 import '../../../../../core/utils/resources/app_strings.dart';
+import '../cubit/tasks_cubit.dart';
 import 'category_item.dart';
 
 class TaskCategoriesListView extends StatelessWidget {

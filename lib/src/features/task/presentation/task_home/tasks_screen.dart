@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_app/src/core/common/widgets/app_bar_action_icon.dart';
-import 'package:todo_app/src/core/utils/resources/app_strings.dart';
+import '../../../../core/common/widgets/app_bar_action_icon.dart';
+import '../../../../core/utils/resources/app_strings.dart';
 import '../../../../core/common/widgets/button_loader.dart';
 import '../../../../core/utils/helpers/dialog_helper.dart';
-import 'package:todo_app/src/core/utils/helpers/toast_helper.dart';
-import 'package:todo_app/src/features/auth/presentation/sign_out/cubit/sign_out_cubit.dart';
+import '../../../../core/utils/helpers/toast_helper.dart';
+import '../../../auth/presentation/sign_out/cubit/sign_out_cubit.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/common/widgets/app_bar.dart';

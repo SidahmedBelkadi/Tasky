@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_app/src/features/task/domain/entities/task_entity.dart';
+import '../../../domain/entities/task_entity.dart';
 
 import '../../../../../core/common/widgets/app_text_form_field.dart';
 import '../../../../../core/common/widgets/task_priority_drop_down.dart';
