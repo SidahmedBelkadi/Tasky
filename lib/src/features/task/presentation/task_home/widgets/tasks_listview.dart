@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:tasky/src/core/common/widgets/error_during_communication.dart';
+import 'package:tasky/src/features/task/presentation/task_home/widgets/listview_skeleton.dart';
+import 'package:tasky/src/features/task/presentation/task_home/widgets/no_more_tasks.dart';
+import 'package:tasky/src/features/task/presentation/task_home/widgets/no_tasks_found.dart';
+import 'package:tasky/src/features/task/presentation/task_home/widgets/task_skeleton.dart';
 import '../../../../../config/routes/app_routes.dart';
 import '../../../../../core/api/end_points.dart';
-import '../../../../../core/common/widgets/button_loader.dart';
 import '../../../../../core/utils/enums/task_priority_enum.dart';
 import '../../../../../core/utils/enums/task_status_enum.dart';
 import '../../../../../core/utils/helpers/toast_helper.dart';
-import '../../../../../core/utils/resources/app_messages.dart';
 import '../../../domain/entities/task_entity.dart';
 import '../cubit/tasks_cubit.dart';
 import 'task.dart';
@@ -22,26 +25,13 @@ class TasksListView extends StatelessWidget {
     return BlocConsumer<TasksCubit, TasksState>(
       builder: (context, state) {
         if (state is GetAllTasksLoading) {
-          return const Center(
-            child: ButtonCircularProgressIndicator(
-              height: 34,
-              width: 34,
-            ),
-          );
+          return const ListviewSkeleton();
         }
 
         if (state is TasksWithData) {
           final tasks = state.tasks;
-
-          // Display message if no tasks found for the selected category
           if (tasks.isEmpty) {
-            return Center(
-              child: Text(
-                'No tasks found.',
-                style: Theme.of(context).textTheme.headlineSmall,
-                textAlign: TextAlign.center,
-              ),
-            );
+            return const NoTasksFound();
           }
 
           return LayoutBuilder(
@@ -67,19 +57,9 @@ class TasksListView extends StatelessWidget {
                       itemBuilder: (_, int index) {
                         if (index == tasks.length) {
                           if (state is FetchingMoreTasks) {
-                            return const Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: CircularProgressIndicator(),
-                              ),
-                            );
+                            return const TaskItemSkeleton();
                           } else if (state is GetAllTasksSuccessfully && !state.hasMoreTasks) {
-                            return const Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Text("No more tasks."),
-                              ),
-                            );
+                            return const NoMoreTasks();
                           }
                           return const SizedBox.shrink();
                         }
@@ -117,13 +97,7 @@ class TasksListView extends StatelessWidget {
         }
 
         if (state is GetAllTasksUnSuccessfully) {
-          return Center(
-            child: Text(
-              AppMessages.errorDuringCommunication,
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-          );
+          return const ErrorDuringCommunication();
         }
 
         return const SizedBox();

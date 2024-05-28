@@ -48,7 +48,7 @@ class TasksRemoteDataSourceImpl implements TasksRemoteDataSource {
     final List<dynamic> decodedResponse = jsonDecode(response);
 
     final List<TaskModel> tasks = decodedResponse.map((e) => TaskModel.fromJson(e)).toList();
-    // await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
     return tasks;
   }
 
