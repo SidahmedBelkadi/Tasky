@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tasky/src/core/common/widgets/button_loader.dart';
 import 'package:tasky/src/core/utils/helpers/toast_helper.dart';
 import 'package:tasky/src/core/utils/resources/app_messages.dart';
 import 'package:tasky/src/features/profile/domain/entities/user_entity.dart';
 import 'package:tasky/src/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:tasky/src/features/profile/presentation/widgets/profile_skeleton.dart';
 
 import '../../../core/common/widgets/app_bar.dart';
 import '../../../core/common/widgets/app_text_form_field.dart';
@@ -31,12 +31,7 @@ class ProfileScreen extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is GetProfileLoading) {
-            return const Center(
-              child: ButtonCircularProgressIndicator(
-                height: 34,
-                width: 34,
-              ),
-            );
+            return const ProfileSkeleton();
           }
 
           if (state is GetProfileUnSuccessfully) {

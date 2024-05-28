@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pretty_qr_code/pretty_qr_code.dart';
+import 'package:tasky/src/features/task/presentation/task_details/widgets/tas_details_skeleton.dart';
+import 'package:tasky/src/features/task/presentation/task_details/widgets/task_qr_code.dart';
 import '../../../../core/api/end_points.dart';
 import '../../../../core/common/widgets/app_text_form_field.dart';
 import '../../../../core/common/widgets/button_loader.dart';
@@ -91,13 +92,13 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
             },
             listener: (context, state) {
               if (state is DeleteTaskSuccessful) {
-                Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
+                Navigator.of(context).pushNamedAndRemoveUntil(Routes.tasksHome, (route) => false);
               }
               if (state is DeleteTaskUnSuccessful) {
                 AppToasts.showErrorToast(message: state.message, context: context);
               }
               if (state is UpdateTaskSuccessful) {
-                Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
+                Navigator.of(context).pushNamedAndRemoveUntil(Routes.tasksHome, (route) => false);
               }
               if (state is UpdateTaskUnSuccessful) {
                 AppToasts.showErrorToast(message: state.message, context: context);
@@ -109,7 +110,7 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
       body: BlocConsumer<TaskDetailCubit, TaskDetailState>(
         builder: (context, state) {
           if (state is GetTaskDetailLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const TaskDetailSkeleton();
           } else if (state is GetTaskDetailSuccessful) {
             task = state.taskEntity;
             dateController.text = task.formattedUpdatedAt;
@@ -246,28 +247,5 @@ class _TaskDetailsScreenState extends State<TaskDetailsScreen> {
         });
       }
     }
-  }
-}
-
-class TaskQrCode extends StatelessWidget {
-  const TaskQrCode({
-    super.key,
-    required this.data,
-  });
-
-  final String data;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: 320.h,
-        width: 320.w,
-        padding: EdgeInsets.all(12.sp),
-        child: PrettyQrView.data(
-          data: data,
-        ),
-      ),
-    );
   }
 }

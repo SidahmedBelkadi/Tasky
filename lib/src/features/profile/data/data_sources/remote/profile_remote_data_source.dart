@@ -16,6 +16,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   Future<UserModel> profile() async {
     final response = await dioConsumer.get(EndPoints.profile);
     final UserModel profile = UserModel.fromJson(jsonDecode(response));
+    // await Future.delayed(Duration(seconds: 3));
     return profile;
   }
 }

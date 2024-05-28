@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tasky/src/core/utils/resources/app_images.dart';
 
 import '../../../../../core/utils/enums/task_priority_enum.dart';
 import '../../../../../core/utils/enums/task_status_enum.dart';
@@ -49,8 +50,9 @@ class TaskItem extends StatelessWidget {
                   width: 64.sp,
                   fit: BoxFit.cover,
                 )
-              : Image.network(
-                  taskImage,
+              : FadeInImage.assetNetwork(
+                  placeholder: AppImages.imageSkeleton2,
+                  image: taskImage,
                   height: 64.sp,
                   width: 64.sp,
                   fit: BoxFit.cover,

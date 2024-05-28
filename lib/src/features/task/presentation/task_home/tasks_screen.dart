@@ -21,35 +21,41 @@ class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildTasksHomeAppBar(context),
-      floatingActionButton: const CustomTasksScreenFloatingActionButtons(),
-      body: Padding(
-        padding: EdgeInsets.all(22.sp),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            /// Tasks Title
-            const TasksHomeTitle(),
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldExit = await _showExitConfirmationDialog(context);
+        return shouldExit ?? false;
+      },
+      child: Scaffold(
+        appBar: buildTasksHomeAppBar(context),
+        floatingActionButton: const CustomTasksScreenFloatingActionButtons(),
+        body: Padding(
+          padding: EdgeInsets.all(22.sp),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              /// Tasks Title
+              const TasksHomeTitle(),
 
-            SizedBox(height: 8.h),
+              SizedBox(height: 8.h),
 
-            /// Categories ListView
-            const TaskCategoriesListView(),
+              /// Categories ListView
+              const TaskCategoriesListView(),
 
-            SizedBox(height: 32.h),
+              SizedBox(height: 32.h),
 
-            /// Tasks ListView
-            const Expanded(
-              child: TasksListView(),
-            ),
-          ],
+              /// Tasks ListView
+              const Expanded(
+                child: TasksListView(),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  /// Function That Build The appBar
+  /// Function That Builds The appBar
   CustomTasksAppBar buildTasksHomeAppBar(BuildContext context) {
     return CustomTasksAppBar(
       isLogo: true,
@@ -93,6 +99,28 @@ class TasksScreen extends StatelessWidget {
         ),
         SizedBox(width: 10.w),
       ],
+    );
+  }
+
+  Future<bool?> _showExitConfirmationDialog(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(AppStrings.exitApp),
+          content: Text(AppStrings.doYouWantToExitApp),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text(AppStrings.no),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text(AppStrings.yes),
+            ),
+          ],
+        );
+      },
     );
   }
 }

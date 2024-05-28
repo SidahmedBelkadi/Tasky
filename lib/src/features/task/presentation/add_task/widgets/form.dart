@@ -39,6 +39,7 @@ class _AddTaskFormState extends State<AddTaskForm> {
   bool _imageError = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  /// Function of Pick Image
   Future<void> _pickImage() async {
     showModalBottomSheet(
       context: context,
@@ -73,6 +74,7 @@ class _AddTaskFormState extends State<AddTaskForm> {
     );
   }
 
+  /// Function For Date Selection
   Future<void> _selectDueDate(BuildContext context) async {
     final pickedDate = await showDatePicker(
       context: context,
@@ -98,6 +100,7 @@ class _AddTaskFormState extends State<AddTaskForm> {
     }
   }
 
+  /// Function For Submittion
   void _submitForm() {
     bool isValidated = _formKey.currentState!.validate();
     if (!isValidated || _image == null) {
@@ -123,96 +126,127 @@ class _AddTaskFormState extends State<AddTaskForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Add Image
-          _image != null
-              ? Image.file(
-                  _image!,
-                  width: context.width,
-                  height: 300.h,
-                  fit: BoxFit.fill,
-                )
-              : AddTaskImageField(
-                  onTap: _pickImage,
-                  isError: _imageError,
-                ),
+          _buildImageField(),
           SizedBox(height: 12.h),
-
-          /// Task Title
-          const AddTaskLabel(text: AppStrings.taskTitle),
-          SizedBox(height: 8.h),
-          AppTextFormField(
+          _buildTextField(
+            label: AppStrings.taskTitle,
+            controller: titleController,
             hint: AppStrings.enterTitle,
-            textEditingController: titleController,
             validationType: InputType.name,
-            isRequired: true,
           ),
           SizedBox(height: 12.h),
-
-          /// Task Description
-          const AddTaskLabel(text: AppStrings.taskDesc),
-          SizedBox(height: 8.h),
-          AppTextFormField(
+          _buildTextField(
+            label: AppStrings.taskDesc,
+            controller: descController,
             hint: AppStrings.enterDesc,
-            textEditingController: descController,
+            validationType: InputType.name,
             minLines: 5,
             maxLines: 7,
-            validationType: InputType.name,
-            isRequired: true,
           ),
           SizedBox(height: 12.h),
-
-          /// Task Priority
-          const AddTaskLabel(text: AppStrings.priority),
-          SizedBox(height: 8.h),
-          TaskPriorityDropDown(
-            taskPriority: _selectedPriority,
-            onChanged: (priority) {
-              setState(() {
-                _selectedPriority = priority!;
-              });
-            },
-            items: TaskPriority.values,
-          ),
+          _buildPriorityDropdown(),
           SizedBox(height: 12.h),
-
-          /// Task Due Date
-          const AddTaskLabel(text: AppStrings.dueDate),
-          SizedBox(height: 8.h),
-          AppTextFormField(
-            readOnly: true,
-            hint: AppStrings.chooseDueDate,
-            textEditingController: dateController,
-            suffixIcon: AppIcons.calendar,
-            onSuffixTap: () => _selectDueDate(context),
-            isRequired: true,
-          ),
+          _buildDatePickerField(),
           SizedBox(height: 32.h),
-
-          /// Task Detail Button
-          BlocConsumer<AddTaskCubit, AddTaskState>(
-            listener: (context, state) {
-              if (state is AddTaskUnSuccessful) {
-                AppToasts.showErrorToast(message: state.message, context: context);
-              }
-              if (state is AddTaskSuccessful) {
-                AppToasts.showSuccessToast(message: AppMessages.taskAdded, context: context);
-                Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
-              }
-            },
-            builder: (context, state) {
-              if (state is AddTaskLoading) {
-                return AddTaskButton(
-                  onPressed: () {},
-                  isLoading: true,
-                );
-              }
-              return AddTaskButton(
-                onPressed: _submitForm,
-              );
-            },
-          )
+          _buildSubmitButton(),
         ],
       ),
+    );
+  }
+
+  Widget _buildImageField() {
+    return _image != null
+        ? Image.file(
+            _image!,
+            width: context.width,
+            height: 300.h,
+            fit: BoxFit.fill,
+          )
+        : AddTaskImageField(
+            onTap: _pickImage,
+            isError: _imageError,
+          );
+  }
+
+  Widget _buildTextField({
+    required String label,
+    required TextEditingController controller,
+    required String hint,
+    required InputType validationType,
+    int minLines = 1,
+    int maxLines = 1,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AddTaskLabel(text: label),
+        SizedBox(height: 8.h),
+        AppTextFormField(
+          hint: hint,
+          textEditingController: controller,
+          validationType: validationType,
+          isRequired: true,
+          minLines: minLines,
+          maxLines: maxLines,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPriorityDropdown() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const AddTaskLabel(text: AppStrings.priority),
+        SizedBox(height: 8.h),
+        TaskPriorityDropDown(
+          taskPriority: _selectedPriority,
+          onChanged: (priority) {
+            setState(() {
+              _selectedPriority = priority!;
+            });
+          },
+          items: TaskPriority.values,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDatePickerField() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const AddTaskLabel(text: AppStrings.dueDate),
+        SizedBox(height: 8.h),
+        AppTextFormField(
+          readOnly: true,
+          hint: AppStrings.chooseDueDate,
+          textEditingController: dateController,
+          suffixIcon: AppIcons.calendar,
+          onSuffixTap: () => _selectDueDate(context),
+          isRequired: true,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSubmitButton() {
+    return BlocConsumer<AddTaskCubit, AddTaskState>(
+      listener: (context, state) {
+        if (state is AddTaskUnSuccessful) {
+          AppToasts.showErrorToast(message: state.message, context: context);
+        }
+        if (state is AddTaskSuccessful) {
+          AppToasts.showSuccessToast(message: AppMessages.taskAdded, context: context);
+          Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
+        }
+      },
+      builder: (context, state) {
+        return AddTaskButton(
+          onPressed: state is AddTaskLoading ? () {} : _submitForm,
+          isLoading: state is AddTaskLoading,
+        );
+      },
     );
   }
 }

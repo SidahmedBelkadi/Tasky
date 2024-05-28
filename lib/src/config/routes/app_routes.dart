@@ -94,9 +94,8 @@ class AppRoutes {
         return RoutesAnimationManager.slideFromRightTransition(
           const QRCodeScannerScreen(),
         );
-      default:
-        return unDefinedRoute();
     }
+    return null;
   }
 
   static Route<dynamic> unDefinedRoute() {

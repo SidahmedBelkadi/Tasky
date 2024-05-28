@@ -35,7 +35,7 @@ class AppStrings {
   static const finished = "Finished";
   static const finishedValue = "finished";
   static const dummyTastText =
-      "This application is designed for super shops. By using this they deliver Customers will get a one-stop solution for shopping.";
+      "This application is designed for super shops. By using this they deliver Customers will get a one-stop solution for shopping. This application is designed for super shops. By using this they deliver Customers will get a one-stop solution for shopping.This application is designed for super shops. By using this they deliver Customers will get a one-stop solution for shopping.This application is designed for super shops. By using this they deliver Customers will get a one-stop solution for shopping.This application is designed for super shops. By using this they deliver Customers will get a one-stop solution for shopping.";
   static const dummyTaskTitle = "Grocery Shopping App";
   static const medium = "Medium";
   static const low = "Low";
@@ -77,4 +77,8 @@ class AppStrings {
   static const highValue = "high";
   static const mediumValue = "medium";
   static const taskUpdated = "Task has been updated successfully";
+  static const String exitApp = 'Exit App';
+  static const String doYouWantToExitApp = 'Do you really want to exit the app?';
+  static const String no = 'No';
+  static const String yes = 'Yes';
 }

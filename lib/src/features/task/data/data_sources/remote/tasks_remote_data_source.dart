@@ -48,7 +48,8 @@ class TasksRemoteDataSourceImpl implements TasksRemoteDataSource {
     final List<dynamic> decodedResponse = jsonDecode(response);
 
     final List<TaskModel> tasks = decodedResponse.map((e) => TaskModel.fromJson(e)).toList();
-    await Future.delayed(const Duration(seconds: 3));
+    // for test
+    // await Future.delayed(const Duration(seconds: 1));
     return tasks;
   }
 
@@ -56,6 +57,8 @@ class TasksRemoteDataSourceImpl implements TasksRemoteDataSource {
   Future<TaskModel> one({required String taskId}) async {
     final response = await dioConsumer.get("${EndPoints.task}/$taskId");
     final decodedResponse = jsonDecode(response);
+    // for test
+    // await Future.delayed(const Duration(seconds: 1));
     return TaskModel.fromJson(decodedResponse);
   }
 
