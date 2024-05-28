@@ -107,16 +107,16 @@ class TasksScreen extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(AppStrings.exitApp),
-          content: Text(AppStrings.doYouWantToExitApp),
+          title: const Text(AppStrings.exitApp),
+          content: const Text(AppStrings.doYouWantToExitApp),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text(AppStrings.no),
+              child: const Text(AppStrings.no),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text(AppStrings.yes),
+              child: const Text(AppStrings.yes),
             ),
           ],
         );
