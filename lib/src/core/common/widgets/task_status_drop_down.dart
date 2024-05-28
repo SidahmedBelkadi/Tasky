@@ -53,7 +53,13 @@ class TaskStatusDropDown extends StatelessWidget {
       items: items.map((status) {
         return DropdownMenuItem<TaskStatus>(
           value: status,
-          child: Text(status.name),
+          child: Text(
+            status.name,
+            style: TextStyle(
+              color: status.color,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         );
       }).toList(),
       onChanged: onChanged,

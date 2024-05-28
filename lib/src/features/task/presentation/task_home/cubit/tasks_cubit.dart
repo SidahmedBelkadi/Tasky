@@ -73,10 +73,10 @@ class TasksCubit extends Cubit<TasksState> {
   }
 
   List<TaskEntity> _filterTasksByCategory(List<TaskEntity> tasks, String category) {
-    if (category == AppStrings.allCategory) {
+    if (category.toLowerCase() == AppStrings.allCategory.toLowerCase()) {
       return tasks;
     }
-    return tasks.where((task) => task.status == category).toList();
+    return tasks.where((task) => task.status?.toLowerCase() == category.toLowerCase()).toList();
   }
 
   void selectCategory(String category) {

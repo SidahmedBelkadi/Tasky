@@ -12,4 +12,7 @@ class EndPoints {
   // ============== Task ===================
   static const String task = "/todos";
   static const String taskImageUpload = "/upload/image";
+
+  // ============== Profile ===================
+  static const String profile = "/auth/profile";
 }

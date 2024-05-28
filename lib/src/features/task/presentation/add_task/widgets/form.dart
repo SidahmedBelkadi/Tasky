@@ -1,21 +1,23 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../config/routes/app_routes.dart';
+import '../../../../../core/common/widgets/app_text_form_field.dart';
+import '../../../../../core/common/widgets/task_priority_drop_down.dart';
 import '../../../../../core/utils/enums/input_type_enum.dart';
+import '../../../../../core/utils/enums/task_priority_enum.dart';
 import '../../../../../core/utils/helpers/image_picker_helper.dart';
 import '../../../../../core/utils/helpers/media_query_values.dart';
 import '../../../../../core/utils/helpers/toast_helper.dart';
+import '../../../../../core/utils/resources/app_icons.dart';
 import '../../../../../core/utils/resources/app_messages.dart';
+import '../../../../../core/utils/resources/app_strings.dart';
 import '../../../domain/entities/task_entity.dart';
 import '../cubit/add_task_cubit.dart';
 import 'button.dart';
-import '../../../../../core/common/widgets/app_text_form_field.dart';
-import '../../../../../core/common/widgets/task_priority_drop_down.dart';
-import '../../../../../core/utils/enums/task_priority_enum.dart';
-import '../../../../../core/utils/resources/app_icons.dart';
-import '../../../../../core/utils/resources/app_strings.dart';
 import 'image_field.dart';
 import 'label.dart';
 
@@ -38,10 +40,37 @@ class _AddTaskFormState extends State<AddTaskForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Future<void> _pickImage() async {
-    final image = await ImagePickerHelper().getImageFromGallery();
-    setState(() {
-      _image = image;
-    });
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Gallery'),
+              onTap: () async {
+                final image = await ImagePickerHelper().getImageFromGallery();
+                setState(() {
+                  _image = image;
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_camera),
+              title: const Text('Camera'),
+              onTap: () async {
+                final image = await ImagePickerHelper().getImageFromCamera();
+                setState(() {
+                  _image = image;
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Future<void> _selectDueDate(BuildContext context) async {
@@ -59,7 +88,7 @@ class _AddTaskFormState extends State<AddTaskForm> {
 
       if (pickedDateOnly.isBefore(todayOnly)) {
         if (mounted) {
-          AppToasts.showErrorToast(message: AppMessages.inferiorDateError, context: context);
+          AppToasts.showWarningToast(message: AppMessages.inferiorDateError, context: context);
         }
       } else {
         setState(() {

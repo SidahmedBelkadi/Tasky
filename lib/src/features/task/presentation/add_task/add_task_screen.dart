@@ -11,7 +11,10 @@ class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildTaskDetailAppBar(),
+      appBar: const CustomTasksAppBar(
+        title: AppStrings.addNewTask,
+        showLeading: true,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -28,13 +31,6 @@ class AddTaskScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  CustomTasksAppBar buildTaskDetailAppBar() {
-    return const CustomTasksAppBar(
-      title: AppStrings.addNewTask,
-      showLeading: true,
     );
   }
 }

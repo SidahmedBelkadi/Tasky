@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import '../../../domain/entities/sign_in_params.dart';
-
 import '../../../../../core/api/dio_consumer.dart';
 import '../../../../../core/api/end_points.dart';
+import '../../../domain/entities/sign_in_params.dart';
 import '../../../domain/entities/sign_up_params.dart';
 import '../../models/auth_response_model.dart';
 

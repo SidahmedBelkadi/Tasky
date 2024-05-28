@@ -20,7 +20,7 @@ abstract class AppToasts {
   static void showInfoToast({required String message, required BuildContext context}) {
     toastification.show(
       context: context,
-      title: const Text('Yeaa!'),
+      title: const Text('Info!'),
       description: Text(
         message,
         style: const TextStyle(fontWeight: FontWeight.bold),

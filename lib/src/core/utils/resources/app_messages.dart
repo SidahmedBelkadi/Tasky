@@ -5,7 +5,7 @@ class AppMessages {
   static const serverFailure = 'Server failure occurred';
   static const cacheFailure = 'Failed to retrieve data from cache';
   static const errorDuringCommunication =
-      "There was an error during communication. Please try again.";
+      "There was an error during communication. Please comeback later.";
   static const badRequest = "Invalid request. Please check your input.";
   static const unauthorized = "You are not authorized to perform this action.";
   static const unprocessable = "Unable to process the request. Please check your input.";
@@ -19,5 +19,5 @@ class AppMessages {
   static const accountCreated = "Your account has been created, welcome to Tasky";
   static const welcomeBack = "Welcome Back !!";
   static const taskAdded = "Task Added Successfully. !";
-  static const inferiorDateError = "The due date cannot be less than today.. !";
+  static const inferiorDateError = "The due date cannot be less than today";
 }

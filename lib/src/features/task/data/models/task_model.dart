@@ -58,6 +58,7 @@ class TaskModel extends TaskEntity {
     );
   }
 
+  @override
   TaskModel copyWith({
     String? id,
     String? image,

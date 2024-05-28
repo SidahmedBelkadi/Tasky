@@ -41,3 +41,23 @@ final class DeleteTaskUnSuccessful extends TaskDetailState {
 }
 
 final class DeleteTaskLoading extends TaskDetailState {}
+
+final class UpdateTaskSuccessful extends TaskDetailState {
+  final TaskEntity taskEntity;
+
+  const UpdateTaskSuccessful({required this.taskEntity});
+
+  @override
+  List<Object> get props => [taskEntity];
+}
+
+final class UpdateTaskUnSuccessful extends TaskDetailState {
+  final String message;
+
+  const UpdateTaskUnSuccessful({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+final class UpdateTaskLoading extends TaskDetailState {}

@@ -10,6 +10,7 @@ import '../../models/task_model.dart';
 abstract class TasksRemoteDataSource {
   Future<TaskModel> create({required TaskModel taskModel, required File imageFile});
   Future<List<TaskModel>> read({required int page});
+  Future<TaskModel> update({required TaskModel taskModel});
   Future<TaskModel> one({required String taskId});
   Future<void> delete({required String taskId});
 }
@@ -47,7 +48,7 @@ class TasksRemoteDataSourceImpl implements TasksRemoteDataSource {
     final List<dynamic> decodedResponse = jsonDecode(response);
 
     final List<TaskModel> tasks = decodedResponse.map((e) => TaskModel.fromJson(e)).toList();
-    // await Future.delayed(Duration(seconds: 1));
+    // await Future.delayed(Duration(seconds: 3));
     return tasks;
   }
 
@@ -61,5 +62,13 @@ class TasksRemoteDataSourceImpl implements TasksRemoteDataSource {
   @override
   Future<void> delete({required String taskId}) async {
     await dioConsumer.delete("${EndPoints.task}/$taskId");
+  }
+
+  @override
+  Future<TaskModel> update({required TaskModel taskModel}) async {
+    final response =
+        await dioConsumer.put("${EndPoints.task}/${taskModel.id}", body: taskModel.toJson());
+    final updatedTask = TaskModel.fromJson(jsonDecode(response));
+    return updatedTask;
   }
 }

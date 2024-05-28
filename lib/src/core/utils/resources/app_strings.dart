@@ -24,13 +24,16 @@ class AppStrings {
   static const tasks = "Tasks";
   static const all = "All";
   static const inProgress = "InProgress";
+  static const inProgressValue = "inProgress";
   static const inProgressCategory = "inprogress";
   static const allCategory = "all";
   static const waitingCategory = "waiting";
   static const finishedCategory = "finished";
 
   static const waiting = "Waiting";
+  static const waitingValue = "waiting";
   static const finished = "Finished";
+  static const finishedValue = "finished";
   static const dummyTastText =
       "This application is designed for super shops. By using this they deliver Customers will get a one-stop solution for shopping.";
   static const dummyTaskTitle = "Grocery Shopping App";
@@ -73,4 +76,5 @@ class AppStrings {
   static const lowValue = "low";
   static const highValue = "high";
   static const mediumValue = "medium";
+  static const taskUpdated = "Task has been updated successfully";
 }

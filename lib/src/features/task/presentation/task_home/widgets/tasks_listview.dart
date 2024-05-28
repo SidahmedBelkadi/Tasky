@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import '../../../../../config/routes/app_routes.dart';
 import '../../../../../core/api/end_points.dart';
 import '../../../../../core/common/widgets/button_loader.dart';
+import '../../../../../core/utils/enums/task_priority_enum.dart';
 import '../../../../../core/utils/enums/task_status_enum.dart';
 import '../../../../../core/utils/helpers/toast_helper.dart';
 import '../../../../../core/utils/resources/app_messages.dart';
 import '../../../domain/entities/task_entity.dart';
 import '../cubit/tasks_cubit.dart';
-
-import '../../../../../config/routes/app_routes.dart';
-import '../../../../../core/utils/enums/task_priority_enum.dart';
-
 import 'task.dart';
 
 class TasksListView extends StatelessWidget {

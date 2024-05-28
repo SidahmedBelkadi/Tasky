@@ -19,7 +19,7 @@ class TodoApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          title: 'Todo Application',
+          title: 'Tasky',
           debugShowCheckedModeBanner: false,
           theme: appTheme(),
           initialRoute: initialRouteHelper.determineInitialRoute(),

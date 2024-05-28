@@ -72,4 +72,18 @@ class TasksRepositioryImpl implements TasksRepository {
     }
     return const Left(NoInternetConnectionFailure(message: AppMessages.noInternetConnection));
   }
+
+  @override
+  Future<Either<Failure, TaskEntity>> update({required TaskEntity taskEntity}) async {
+    if (await networkInfo.isConnected) {
+      final TaskModel taskModel = TaskModel.fromEntity(taskEntity);
+      try {
+        final TaskEntity taskEntity = await remoteDataSource.update(taskModel: taskModel);
+        return Right(taskEntity);
+      } catch (e) {
+        return Left(ServerFailure(message: e.toString()));
+      }
+    }
+    return const Left(NoInternetConnectionFailure(message: AppMessages.noInternetConnection));
+  }
 }

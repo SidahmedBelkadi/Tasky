@@ -41,7 +41,7 @@ class TaskCategoriesListView extends StatelessWidget {
               ),
               SizedBox(width: 8.w),
               TaskCategoryItem(
-                text: AppStrings.finishedCategory,
+                text: AppStrings.finished,
                 isSelected: selectedCategory == AppStrings.finishedCategory,
                 onTap: () => context.read<TasksCubit>().selectCategory(AppStrings.finishedCategory),
               ),

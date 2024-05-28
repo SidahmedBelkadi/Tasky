@@ -12,4 +12,12 @@ class ImagePickerHelper {
     }
     return null;
   }
+
+  Future<File?> getImageFromCamera() async {
+    final file = await _imagePicker.pickImage(source: ImageSource.camera);
+    if (file != null) {
+      return File(file.path);
+    }
+    return null;
+  }
 }

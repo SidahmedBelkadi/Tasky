@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tasky/src/features/code_qr_scan/code_scanner.dart';
+import 'package:tasky/src/features/profile/presentation/cubit/profile_cubit.dart';
 import '../../features/task/presentation/add_task/cubit/add_task_cubit.dart';
 import '../../features/task/presentation/task_details/cubit/task_detail_cubit.dart';
 import '../../features/task/presentation/task_home/cubit/tasks_cubit.dart';
@@ -26,11 +28,11 @@ class Routes {
   static const String addTask = '/add_task';
   static const String taskDetails = '/task_details';
   static const String profile = '/profile';
+  static const String qrCodeScanner = '/qr_code_scanner';
 }
 
 class AppRoutes {
   static Route? onGenerateRoute(RouteSettings routeSettings) {
-    // ignore: unused_local_variable
     final args = routeSettings.arguments;
 
     switch (routeSettings.name) {
@@ -73,7 +75,6 @@ class AppRoutes {
             child: const AddTaskScreen(),
           ),
         );
-
       case Routes.taskDetails:
         return RoutesAnimationManager.slideFromRightTransition(
           args: args,
@@ -82,12 +83,17 @@ class AppRoutes {
             child: const TaskDetailsScreen(),
           ),
         );
-
       case Routes.profile:
         return RoutesAnimationManager.slideFromRightTransition(
-          const ProfileScreen(),
+          BlocProvider(
+            create: (context) => serviceLocator<ProfileCubit>()..getProfile(),
+            child: const ProfileScreen(),
+          ),
         );
-
+      case Routes.qrCodeScanner:
+        return RoutesAnimationManager.slideFromRightTransition(
+          const QRCodeScannerScreen(),
+        );
       default:
         return unDefinedRoute();
     }
