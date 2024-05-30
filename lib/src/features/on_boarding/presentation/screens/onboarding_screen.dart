@@ -15,30 +15,28 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SizedBox(
-          height: context.height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              /// Header Image Background
-              const FemaleHeaderImageBackground(),
+      body: SizedBox(
+        height: context.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            /// Header Image Background
+            const FemaleHeaderImageBackground(),
 
-              SizedBox(height: 20.0.h),
+            SizedBox(height: 20.0.h),
 
-              /// Header Title & SubTitle
-              const OnBoardingHeaderTexts(),
+            /// Header Title & SubTitle
+            const OnBoardingHeaderTexts(),
 
-              /// Button
-              OnBoardingButton(
-                onPressed: () {
-                  di.serviceLocator<LaunchHelper>().firstTime();
-                  Navigator.of(context).pushReplacementNamed(Routes.signIn);
-                },
-              ),
-              SizedBox(height: 64.0.h),
-            ],
-          ),
+            /// Button
+            OnBoardingButton(
+              onPressed: () {
+                di.serviceLocator<LaunchHelper>().firstTime();
+                Navigator.of(context).pushReplacementNamed(Routes.signIn);
+              },
+            ),
+            SizedBox(height: 64.0.h),
+          ],
         ),
       ),
     );

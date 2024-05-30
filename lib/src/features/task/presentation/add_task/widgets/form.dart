@@ -102,6 +102,10 @@ class _AddTaskFormState extends State<AddTaskForm> {
 
   /// Function For Submittion
   void _submitForm() {
+    if (titleController.text.trim() == '' || descController.text.trim() == '') {
+      return;
+    }
+
     bool isValidated = _formKey.currentState!.validate();
     if (!isValidated || _image == null) {
       setState(() {

@@ -29,6 +29,10 @@ class SignInCubit extends Cubit<SignInState> {
 
   /// SignIn
   Future<void> signIn({required SignInParams signInParams}) async {
+    if (passwordController.text.trim() == '') {
+      return;
+    }
+
     final isValidated = formKey.currentState!.validate();
     if (!isValidated) {
       return;

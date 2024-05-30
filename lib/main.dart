@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'src/bloc_observer.dart';
-import 'src/di/initialize_services.dart' as di;
+import 'src/injection_container.dart' as di;
 import 'src/todo_app.dart';
 
 void main() async {

@@ -33,6 +33,10 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   /// SignUp
   Future<void> signUp({required SignUpParams signUpParams}) async {
+    if (nameController.text.trim() == '' || passwordController.text.trim() == '') {
+      return;
+    }
+
     final isValidated = formKey.currentState!.validate();
     if (!isValidated) {
       return;
