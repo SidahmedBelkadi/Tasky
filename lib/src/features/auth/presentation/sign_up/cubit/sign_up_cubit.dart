@@ -24,7 +24,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final phoneController = PhoneController(
-    const PhoneNumber(isoCode: IsoCode.EG, nsn: ''),
+    const PhoneNumber(isoCode: IsoCode.DZ, nsn: ''),
   );
   final experienceYearsController = TextEditingController();
   final addressController = TextEditingController();

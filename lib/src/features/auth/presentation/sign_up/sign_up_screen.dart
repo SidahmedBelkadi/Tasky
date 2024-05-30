@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tasky/src/core/utils/helpers/dialog_helper.dart';
+import 'package:tasky/src/core/utils/helpers/media_query_values.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/common/widgets/account_question.dart';
@@ -17,63 +19,70 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: SizedBox(
-            // height: context.height,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32.sp),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 16.h),
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldExit = await AppDialog.showExitConfirmationDialog(context);
+        return shouldExit ?? false;
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: SizedBox(
+              height: context.height,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 32.sp),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 16.h),
 
-                  /// SignUp Title
-                  Text(AppStrings.signUp, style: Theme.of(context).textTheme.headlineMedium),
+                    /// SignUp Title
+                    Text(AppStrings.signUp, style: Theme.of(context).textTheme.headlineMedium),
 
-                  SizedBox(height: 16.h),
+                    SizedBox(height: 16.h),
 
-                  /// SignUp Form
-                  const SignUpForm(),
+                    /// SignUp Form
+                    const SignUpForm(),
 
-                  SizedBox(height: 24.h),
+                    SizedBox(height: 24.h),
 
-                  /// SignUp Button
-                  BlocConsumer<SignUpCubit, SignUpState>(
-                    listener: (context, state) {
-                      if (state is SignUpSuccessful) {
-                        AppToasts.showSuccessToast(
-                            message: AppMessages.accountCreated, context: context);
-                        Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
-                      } else if (state is SignUpUnSuccessful) {
-                        AppToasts.showErrorToast(message: state.message, context: context);
-                      }
-                    },
-                    builder: (context, state) {
-                      if (state is SignUpLoading) {
-                        return SignUpButton(onPressed: () {}, isLoading: true);
-                      }
-                      return SignUpButton(
-                        onPressed: () {
-                          final cubit = context.read<SignUpCubit>();
-                          _signUp(context, cubit);
-                        },
-                      );
-                    },
-                  ),
+                    /// SignUp Button
+                    BlocConsumer<SignUpCubit, SignUpState>(
+                      listener: (context, state) {
+                        if (state is SignUpSuccessful) {
+                          AppToasts.showSuccessToast(
+                              message: AppMessages.accountCreated, context: context);
+                          Navigator.of(context).pushReplacementNamed(Routes.tasksHome);
+                        } else if (state is SignUpUnSuccessful) {
+                          AppToasts.showErrorToast(message: state.message, context: context);
+                        }
+                      },
+                      builder: (context, state) {
+                        if (state is SignUpLoading) {
+                          return SignUpButton(onPressed: () {}, isLoading: true);
+                        }
+                        return SignUpButton(
+                          onPressed: () {
+                            final cubit = context.read<SignUpCubit>();
+                            _signUp(context, cubit);
+                          },
+                        );
+                      },
+                    ),
 
-                  SizedBox(height: 24.h),
+                    SizedBox(height: 24.h),
 
-                  /// Account Question
-                  AccountQuestion(
-                    text: AppStrings.alreadyHaveAcc,
-                    buttonText: AppStrings.signIn,
-                    onPressed: () {
-                      Navigator.of(context).pushReplacementNamed(Routes.signIn);
-                    },
-                  ),
-                ],
+                    /// Account Question
+                    AccountQuestion(
+                      text: AppStrings.alreadyHaveAcc,
+                      buttonText: AppStrings.signIn,
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(Routes.signIn);
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

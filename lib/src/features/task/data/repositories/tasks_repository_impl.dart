@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/utils/networking/network_info.dart';
@@ -19,8 +18,10 @@ class TasksRepositioryImpl implements TasksRepository {
   });
 
   @override
-  Future<Either<Failure, TaskEntity>> create(
-      {required TaskEntity taskEntity, required File imageFile}) async {
+  Future<Either<Failure, TaskEntity>> create({
+    required TaskEntity taskEntity,
+    required File imageFile,
+  }) async {
     final TaskModel taskModel = TaskModel.fromEntity(taskEntity);
     if (await networkInfo.isConnected) {
       try {

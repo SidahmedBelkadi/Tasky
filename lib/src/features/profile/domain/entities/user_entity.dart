@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:libphonenumber/libphonenumber.dart';
 
 class UserEntity extends Equatable {
   final String? id;
@@ -20,25 +19,4 @@ class UserEntity extends Equatable {
 
   @override
   List<Object?> get props => [id, name, phoneNumber, level, experience, address];
-
-  // Method to format the phone number
-  Future<String> getFormattedPhoneNumber({String defaultRegion = 'US'}) async {
-    try {
-      final isValid = await PhoneNumberUtil.isValidPhoneNumber(
-        phoneNumber: phoneNumber,
-        isoCode: defaultRegion,
-      );
-      if (isValid ?? false) {
-        final formattedNumber = await PhoneNumberUtil.normalizePhoneNumber(
-          phoneNumber: phoneNumber,
-          isoCode: defaultRegion,
-        );
-        return formattedNumber ?? phoneNumber;
-      } else {
-        return phoneNumber; // Return as is if the number is invalid
-      }
-    } catch (e) {
-      return phoneNumber; // Return as is in case of any exception
-    }
-  }
 }

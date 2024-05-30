@@ -23,7 +23,7 @@ class SignInCubit extends Cubit<SignInState> {
   /// Variables
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final phoneController = PhoneController(
-    const PhoneNumber(isoCode: IsoCode.EG, nsn: ''),
+    const PhoneNumber(isoCode: IsoCode.DZ, nsn: ''),
   );
   final passwordController = TextEditingController();
 

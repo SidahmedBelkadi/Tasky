@@ -23,7 +23,7 @@ class TasksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        final shouldExit = await _showExitConfirmationDialog(context);
+        final shouldExit = await AppDialog.showExitConfirmationDialog(context);
         return shouldExit ?? false;
       },
       child: Scaffold(
@@ -99,28 +99,6 @@ class TasksScreen extends StatelessWidget {
         ),
         SizedBox(width: 10.w),
       ],
-    );
-  }
-
-  Future<bool?> _showExitConfirmationDialog(BuildContext context) {
-    return showDialog<bool>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text(AppStrings.exitApp),
-          content: const Text(AppStrings.doYouWantToExitApp),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text(AppStrings.no),
-            ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text(AppStrings.yes),
-            ),
-          ],
-        );
-      },
     );
   }
 }
